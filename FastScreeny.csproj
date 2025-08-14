@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>FastScreeny</AssemblyName>
+    <RootNamespace>FastScreeny</RootNamespace>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="App.xaml.cs" />
+    <Compile Include="MainWindow.xaml.cs" />
+    <Compile Include="SettingsWindow.xaml.cs" />
+    <Compile Include="OverlaySelectionWindow.xaml.cs" />
+    <Compile Include="EditorWindow.xaml.cs" />
+    <Compile Include="Services\ScreenCaptureService.cs" />
+    <Compile Include="Services\HotkeyManager.cs" />
+    <Compile Include="Services\AutoStartManager.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\StoragePaths.cs" />
+    <Compile Include="Models\AppSettings.cs" />
+    <Compile Include="Models\Hotkey.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+    <Page Include="MainWindow.xaml" />
+    <Page Include="SettingsWindow.xaml" />
+    <Page Include="OverlaySelectionWindow.xaml" />
+    <Page Include="EditorWindow.xaml" />
+  </ItemGroup>
+
+</Project>
+
+
