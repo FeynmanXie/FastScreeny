@@ -37,13 +37,13 @@ namespace FastScreeny
             BorderPresetBox.Items.Clear();
             var presets = new[]
             {
-                "自定义",
-                "梦幻紫粉",
-                "炫彩彩虹",
-                "薄雾白边",
-                "暖阳橙金",
-                "极夜黑蓝",
-                "荧光青紫"
+                "Custom",
+                "Purple Pink Dream",
+                "Rainbow Spectrum",
+                "Misty White",
+                "Warm Orange Gold",
+                "Dark Night Blue",
+                "Fluorescent Cyan Purple"
             };
             foreach (var p in presets) BorderPresetBox.Items.Add(p);
         }
@@ -78,7 +78,7 @@ namespace FastScreeny
             }
             _settingsService.Settings.BorderGradientStart = string.IsNullOrWhiteSpace(BorderStartColorBox.Text) ? "#FF5B8DEF" : BorderStartColorBox.Text.Trim();
             _settingsService.Settings.BorderGradientEnd = string.IsNullOrWhiteSpace(BorderEndColorBox.Text) ? "#FF84A8FF" : BorderEndColorBox.Text.Trim();
-            _settingsService.Settings.BorderPreset = (BorderPresetBox.SelectedItem as string) ?? "自定义";
+            _settingsService.Settings.BorderPreset = (BorderPresetBox.SelectedItem as string) ?? "Custom";
 
             _onSaved();
             Close();
@@ -94,35 +94,35 @@ namespace FastScreeny
     {
         private void BorderPresetBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            var preset = (BorderPresetBox.SelectedItem as string) ?? "自定义";
+            var preset = (BorderPresetBox.SelectedItem as string) ?? "Custom";
             switch (preset)
             {
-                case "梦幻紫粉":
+                case "Purple Pink Dream":
                     BorderThicknessBox.Text = "40";
                     BorderStartColorBox.Text = "#FF8B5CF6";
                     BorderEndColorBox.Text = "#FFEC4899";
                     break;
-                case "炫彩彩虹":
+                case "Rainbow Spectrum":
                     BorderThicknessBox.Text = "45";
                     BorderStartColorBox.Text = "#FF8B5CF6";
                     BorderEndColorBox.Text = "#FFFBBF24";
                     break;
-                case "薄雾白边":
+                case "Misty White":
                     BorderThicknessBox.Text = "36";
                     BorderStartColorBox.Text = "#FFFFFFFF";
                     BorderEndColorBox.Text = "#FFEFEFEF";
                     break;
-                case "暖阳橙金":
+                case "Warm Orange Gold":
                     BorderThicknessBox.Text = "32";
                     BorderStartColorBox.Text = "#FFFF6B35";
                     BorderEndColorBox.Text = "#FFFBBF24";
                     break;
-                case "极夜黑蓝":
+                case "Dark Night Blue":
                     BorderThicknessBox.Text = "30";
                     BorderStartColorBox.Text = "#FF0F172A";
                     BorderEndColorBox.Text = "#FF1E293B";
                     break;
-                case "荧光青紫":
+                case "Fluorescent Cyan Purple":
                     BorderThicknessBox.Text = "35";
                     BorderStartColorBox.Text = "#FF06B6D4";
                     BorderEndColorBox.Text = "#FF8B5CF6";

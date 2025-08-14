@@ -8,8 +8,8 @@
         Visibility="Collapsed">
     <Grid Background="#0F1115">
         <StackPanel Margin="20" >
-            <TextBlock Text="FastScreeny 正在运行" Foreground="White" FontSize="18" Margin="0,0,0,12"/>
-            <TextBlock Text="右键托盘图标可进行设置、截图或退出。" Foreground="#9AA4B2"/>
+            <TextBlock Text="FastScreeny is running" Foreground="White" FontSize="18" Margin="0,0,0,12"/>
+            <TextBlock Text="Right-click the tray icon to access settings, capture screenshots, or exit." Foreground="#9AA4B2"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -50,12 +50,12 @@ namespace FastScreeny
             };
 
             var contextMenu = new WinForms.ContextMenuStrip();
-            contextMenu.Items.Add("设置", null, (s, e) => ShowSettings());
-            contextMenu.Items.Add("区域截图", null, async (s, e) => await ScreenCaptureService.CaptureRegionToDefaultAsync(_settingsService!));
-            contextMenu.Items.Add("区域截图（直接保存）", null, async (s, e) => await ScreenCaptureService.CaptureRegionAndSaveAsync(_settingsService!));
-            contextMenu.Items.Add("区域截图（编辑模式）", null, async (s, e) => await ScreenCaptureService.CaptureRegionAndEditAsync(_settingsService!));
+            contextMenu.Items.Add("Settings", null, (s, e) => ShowSettings());
+            contextMenu.Items.Add("Region Screenshot", null, async (s, e) => await ScreenCaptureService.CaptureRegionToDefaultAsync(_settingsService!));
+            contextMenu.Items.Add("Region Screenshot (Save Directly)", null, async (s, e) => await ScreenCaptureService.CaptureRegionAndSaveAsync(_settingsService!));
+            contextMenu.Items.Add("Region Screenshot (Edit Mode)", null, async (s, e) => await ScreenCaptureService.CaptureRegionAndEditAsync(_settingsService!));
             contextMenu.Items.Add(new WinForms.ToolStripSeparator());
-            contextMenu.Items.Add("退出", null, (s, e) => ExitApplication());
+            contextMenu.Items.Add("Exit", null, (s, e) => ExitApplication());
             _notifyIcon.ContextMenuStrip = contextMenu;
 
             _notifyIcon.DoubleClick += (s, e) => ShowSettings();
@@ -73,7 +73,7 @@ namespace FastScreeny
             });
             if (!ok)
             {
-                _notifyIcon?.ShowBalloonTip(3000, "快捷键注册失败", $"{_settingsService.Settings.HotkeyRegion} 可能被其他程序占用，或需要管理员权限。", WinForms.ToolTipIcon.Warning);
+                _notifyIcon?.ShowBalloonTip(3000, "Hotkey Registration Failed", $"{_settingsService.Settings.HotkeyRegion} may be occupied by other programs or requires administrator privileges.", WinForms.ToolTipIcon.Warning);
             }
         }
 

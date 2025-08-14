@@ -33,10 +33,10 @@ namespace FastScreeny
 
         private readonly List<BrushPreset> _brushPresets = new()
         {
-            new BrushPreset { Name = "红色强调", Stroke = System.Windows.Media.Brushes.Red, Thickness = 4 },
-            new BrushPreset { Name = "荧光青", Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x00,0xE5,0xFF)), Thickness = 4 },
-            new BrushPreset { Name = "亮紫", Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x7B,0x61,0xFF)), Thickness = 4 },
-            new BrushPreset { Name = "黑色粗线", Stroke = System.Windows.Media.Brushes.Black, Thickness = 6 }
+            new BrushPreset { Name = "Red Accent", Stroke = System.Windows.Media.Brushes.Red, Thickness = 4 },
+            new BrushPreset { Name = "Fluorescent Cyan", Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x00,0xE5,0xFF)), Thickness = 4 },
+            new BrushPreset { Name = "Bright Purple", Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0x7B,0x61,0xFF)), Thickness = 4 },
+            new BrushPreset { Name = "Black Thick Line", Stroke = System.Windows.Media.Brushes.Black, Thickness = 6 }
         };
 
         public EditorWindow(Bitmap bitmap, SettingsService settingsService)
@@ -54,7 +54,7 @@ namespace FastScreeny
             // 初始化边框控件
             EnableBorderCheck.IsChecked = _settingsService.Settings.EnableBorder;
             BorderThicknessBox.Text = _settingsService.Settings.BorderThickness.ToString();
-            BorderPresetBox.ItemsSource = new[] { "自定义", "梦幻紫粉", "炫彩彩虹", "薄雾白边", "暖阳橙金", "极夜黑蓝", "荧光青紫" };
+            BorderPresetBox.ItemsSource = new[] { "Custom", "Purple Pink Dream", "Rainbow Spectrum", "Misty White", "Warm Orange Gold", "Dark Night Blue", "Fluorescent Cyan Purple" };
             BorderPresetBox.SelectedItem = _settingsService.Settings.BorderPreset;
             BorderStartColorBox.Text = _settingsService.Settings.BorderGradientStart;
             BorderEndColorBox.Text = _settingsService.Settings.BorderGradientEnd;
@@ -302,35 +302,35 @@ namespace FastScreeny
 
         private void BorderPresetBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var name = BorderPresetBox.SelectedItem as string ?? "自定义";
+            var name = BorderPresetBox.SelectedItem as string ?? "Custom";
             switch (name)
             {
-                case "梦幻紫粉":
+                case "Purple Pink Dream":
                     BorderThicknessBox.Text = "40";
                     BorderStartColorBox.Text = "#FF8B5CF6";
                     BorderEndColorBox.Text = "#FFEC4899";
                     break;
-                case "炫彩彩虹":
+                case "Rainbow Spectrum":
                     BorderThicknessBox.Text = "45";
                     BorderStartColorBox.Text = "#FF8B5CF6";
                     BorderEndColorBox.Text = "#FFFBBF24";
                     break;
-                case "薄雾白边":
+                case "Misty White":
                     BorderThicknessBox.Text = "36";
                     BorderStartColorBox.Text = "#FFFFFFFF";
                     BorderEndColorBox.Text = "#FFEFEFEF";
                     break;
-                case "暖阳橙金":
+                case "Warm Orange Gold":
                     BorderThicknessBox.Text = "32";
                     BorderStartColorBox.Text = "#FFFF6B35";
                     BorderEndColorBox.Text = "#FFFBBF24";
                     break;
-                case "极夜黑蓝":
+                case "Dark Night Blue":
                     BorderThicknessBox.Text = "30";
                     BorderStartColorBox.Text = "#FF0F172A";
                     BorderEndColorBox.Text = "#FF1E293B";
                     break;
-                case "荧光青紫":
+                case "Fluorescent Cyan Purple":
                     BorderThicknessBox.Text = "35";
                     BorderStartColorBox.Text = "#FF06B6D4";
                     BorderEndColorBox.Text = "#FF8B5CF6";

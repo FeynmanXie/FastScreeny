@@ -14,7 +14,7 @@ namespace FastScreeny.Models
         public int BorderThickness { get; set; } = 24; // pixels
         public string BorderGradientStart { get; set; } = "#FF5B8DEF";
         public string BorderGradientEnd { get; set; } = "#FF84A8FF";
-        public string BorderPreset { get; set; } = "自定义";
+        public string BorderPreset { get; set; } = "Custom";
         // Default capture mode: direct save or open in editor
         public bool DefaultOpenInEditor { get; set; } = false;
     }

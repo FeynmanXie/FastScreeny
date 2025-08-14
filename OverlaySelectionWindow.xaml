@@ -7,7 +7,7 @@
     <Canvas x:Name="CanvasRoot">
         <Rectangle x:Name="SelectionRect" Stroke="#5B8DEF" StrokeThickness="2" Fill="#4084A8FF" Visibility="Collapsed"/>
         <TextBlock x:Name="Hint" Foreground="White" FontSize="14" Margin="16">
-            拖拽选择区域，Enter确认，Esc取消
+            Drag to select area, Enter to confirm, Esc to cancel
         </TextBlock>
     </Canvas>
 </Window>

@@ -1,7 +1,7 @@
 <Window x:Class="FastScreeny.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FastScreeny 设置" Height="420" Width="560"
+        Title="FastScreeny Settings" Height="420" Width="560"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Grid Background="#0F1115">
@@ -13,51 +13,51 @@
 
         <Border Background="#151821" Padding="16">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="FastScreeny 设置" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Text="FastScreeny Settings" Foreground="White" FontSize="18" FontWeight="Bold"/>
             </StackPanel>
         </Border>
 
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="16" Orientation="Vertical">
                 <StackPanel Orientation="Vertical" Margin="0,0,0,12">
-                    <TextBlock Text="保存目录" Foreground="#9AA4B2"/>
+                    <TextBlock Text="Save Directory" Foreground="#9AA4B2"/>
                     <DockPanel>
                         <TextBox x:Name="SavePathBox" MinWidth="360" Margin="0,0,8,0"/>
-                        <Button Content="浏览" Click="Browse_Click"/>
+                        <Button Content="Browse" Click="Browse_Click"/>
                     </DockPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Margin="0,0,0,12">
-                    <TextBlock Text="文件命名格式" Foreground="#9AA4B2"/>
+                    <TextBlock Text="File Naming Format" Foreground="#9AA4B2"/>
                     <TextBox x:Name="FileNamePatternBox" MinWidth="360"/>
-                    <TextBlock Text="示例：screenshot_{yyyyMMdd_HHmmss}.png" Foreground="#6B7280"/>
+                    <TextBlock Text="Example: screenshot_{yyyyMMdd_HHmmss}.png" Foreground="#6B7280"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Margin="0,0,0,12">
-                    <TextBlock Text="区域截图快捷键" Foreground="#9AA4B2"/>
+                    <TextBlock Text="Region Screenshot Hotkey" Foreground="#9AA4B2"/>
                     <TextBox x:Name="HotkeyRegionBox" MinWidth="240"/>
-                    <TextBlock Text="例：Ctrl+Alt+A" Foreground="#6B7280"/>
+                    <TextBlock Text="Example: Ctrl+Alt+A" Foreground="#6B7280"/>
                 </StackPanel>
 
-                <CheckBox x:Name="AutoCopyCheck" Content="截图后自动复制到剪贴板" Foreground="#E5E7EB"/>
-                <CheckBox x:Name="LaunchOnStartupCheck" Content="开机自启" Foreground="#E5E7EB"/>
-                <CheckBox x:Name="DefaultOpenInEditorCheck" Content="默认进入编辑模式（否则直接保存）" Foreground="#E5E7EB"/>
+                <CheckBox x:Name="AutoCopyCheck" Content="Auto-copy to clipboard after screenshot" Foreground="#E5E7EB"/>
+                <CheckBox x:Name="LaunchOnStartupCheck" Content="Launch on startup" Foreground="#E5E7EB"/>
+                <CheckBox x:Name="DefaultOpenInEditorCheck" Content="Default to editor mode (otherwise save directly)" Foreground="#E5E7EB"/>
 
                 <Separator Margin="0,16,0,12"/>
-                <TextBlock Text="边框（不遮挡内容，绘制在外围）" Foreground="#9AA4B2" Margin="0,0,0,6"/>
-                <CheckBox x:Name="EnableBorderCheck" Content="启用渐变边框" Foreground="#E5E7EB"/>
+                <TextBlock Text="Border (non-intrusive, drawn around content)" Foreground="#9AA4B2" Margin="0,0,0,6"/>
+                <CheckBox x:Name="EnableBorderCheck" Content="Enable gradient border" Foreground="#E5E7EB"/>
                 <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                    <TextBlock Text="预设" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Preset" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <ComboBox x:Name="BorderPresetBox" Width="220"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                    <TextBlock Text="边框厚度(px)" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Border Thickness (px)" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <TextBox x:Name="BorderThicknessBox" Width="96"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                    <TextBlock Text="渐变起始色" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Gradient Start Color" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <TextBox x:Name="BorderStartColorBox" Width="140"/>
-                    <TextBlock Text="  结束色" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="12,0,8,0"/>
+                    <TextBlock Text="  End Color" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="12,0,8,0"/>
                     <TextBox x:Name="BorderEndColorBox" Width="140"/>
                 </StackPanel>
             </StackPanel>
@@ -65,8 +65,8 @@
 
         <Border Grid.Row="2" Background="#151821" Padding="12">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="保存" Width="96" Margin="0,0,8,0" Click="Save_Click"/>
-                <Button Content="取消" Width="96" Click="Cancel_Click"/>
+                <Button Content="Save" Width="96" Margin="0,0,8,0" Click="Save_Click"/>
+                <Button Content="Cancel" Width="96" Click="Cancel_Click"/>
             </StackPanel>
         </Border>
     </Grid>
