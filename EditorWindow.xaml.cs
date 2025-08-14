@@ -17,8 +17,9 @@ namespace FastScreeny
     {
         private readonly SettingsService _settingsService;
         private Bitmap _workingBitmap;
-        private enum Tool { None, Circle, Rect, Arrow, Crop }
+        private enum Tool { None, Circle, Rect, Arrow }
         private Tool _currentTool = Tool.None;
+        private bool _drawingMode = false; // 绘画模式状态
 
         private System.Windows.Point _dragStart;
         private bool _dragging;
@@ -59,6 +60,35 @@ namespace FastScreeny
             BorderStartColorBox.Text = _settingsService.Settings.BorderGradientStart;
             BorderEndColorBox.Text = _settingsService.Settings.BorderGradientEnd;
             BorderPresetBox.SelectionChanged += BorderPresetBox_SelectionChanged;
+            
+            // 添加边框预览事件
+            EnableBorderCheck.Checked += BorderSettings_Changed;
+            EnableBorderCheck.Unchecked += BorderSettings_Changed;
+            BorderThicknessBox.TextChanged += BorderSettings_Changed;
+            BorderStartColorBox.TextChanged += BorderSettings_Changed;
+            BorderEndColorBox.TextChanged += BorderSettings_Changed;
+            
+            // 初始预览
+            UpdateBorderPreview();
+            
+            // 确保Canvas尺寸正确
+            this.Loaded += EditorWindow_Loaded;
+        }
+
+        private void EditorWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // 确保OverlayCanvas的尺寸与图像匹配
+            UpdateCanvasSizes();
+        }
+
+        private void UpdateCanvasSizes()
+        {
+            // 设置OverlayCanvas的尺寸与BaseImage匹配
+            var imageWidth = BaseImage.ActualWidth > 0 ? BaseImage.ActualWidth : _workingBitmap.Width;
+            var imageHeight = BaseImage.ActualHeight > 0 ? BaseImage.ActualHeight : _workingBitmap.Height;
+            
+            OverlayCanvas.Width = imageWidth;
+            OverlayCanvas.Height = imageHeight;
         }
 
         private static BitmapImage BitmapToImageSource(Bitmap bitmap)
@@ -81,42 +111,50 @@ namespace FastScreeny
             return preset;
         }
 
-        private void ToolCircleBtn_Click(object sender, RoutedEventArgs e) => _currentTool = Tool.Circle;
-        private void ToolRectBtn_Click(object sender, RoutedEventArgs e) => _currentTool = Tool.Rect;
-        private void ToolArrowBtn_Click(object sender, RoutedEventArgs e) => _currentTool = Tool.Arrow;
-        private void CropModeBtn_Click(object sender, RoutedEventArgs e)
+        private void DrawingModeBtn_Click(object sender, RoutedEventArgs e)
         {
-            _currentTool = Tool.Crop;
-            CropCanvas.Visibility = Visibility.Visible;
+            _drawingMode = !_drawingMode;
+            UpdateDrawingModeUI();
+            UpdateBorderPreview();
         }
-        private void ApplyCropBtn_Click(object sender, RoutedEventArgs e)
+
+        private void UpdateDrawingModeUI()
         {
-            if (_previewShape == null) return;
-            var rect = new System.Drawing.Rectangle((int)System.Windows.Controls.Canvas.GetLeft(_previewShape), (int)System.Windows.Controls.Canvas.GetTop(_previewShape), (int)_previewShape.Width, (int)_previewShape.Height);
-            rect.Intersect(new System.Drawing.Rectangle(0, 0, _workingBitmap.Width, _workingBitmap.Height));
-            if (rect.Width <= 0 || rect.Height <= 0) return;
-            var cropped = new Bitmap(rect.Width, rect.Height);
-            using (var g = Graphics.FromImage(cropped))
+            if (_drawingMode)
             {
-                g.DrawImage(_workingBitmap, new System.Drawing.Rectangle(0, 0, rect.Width, rect.Height), rect, System.Drawing.GraphicsUnit.Pixel);
+                DrawingModeBtn.Content = "🖼️ Preview Mode";
+                DrawingModeBtn.Style = (Style)FindResource("DangerButton");
             }
-            _workingBitmap.Dispose();
-            _workingBitmap = cropped;
-            BaseImage.Source = BitmapToImageSource(_workingBitmap);
-            OverlayCanvas.Children.Clear();
-            CropCanvas.Visibility = Visibility.Collapsed;
-            _currentTool = Tool.None;
+            else
+            {
+                DrawingModeBtn.Content = "🎨 Drawing Mode";
+                DrawingModeBtn.Style = (Style)FindResource("PrimaryButton");
+            }
         }
-        private void CancelCropBtn_Click(object sender, RoutedEventArgs e)
+
+        private void ToolCircleBtn_Click(object sender, RoutedEventArgs e) 
         {
-            CropCanvas.Visibility = Visibility.Collapsed;
-            _currentTool = Tool.None;
-            if (_previewShape != null) { OverlayCanvas.Children.Remove(_previewShape); _previewShape = null; }
+            _currentTool = Tool.Circle;
+        }
+        private void ToolRectBtn_Click(object sender, RoutedEventArgs e) 
+        {
+            _currentTool = Tool.Rect;
+        }
+        private void ToolArrowBtn_Click(object sender, RoutedEventArgs e) 
+        {
+            _currentTool = Tool.Arrow;
         }
 
         private void OverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _dragStart = e.GetPosition(OverlayCanvas);
+            // 在边框预览模式下禁用绘图（除了绘画模式）
+            if (PreviewImage.Visibility == Visibility.Visible && !_drawingMode)
+            {
+                return; // 不允许在边框预览上绘图
+            }
+            
+            var canvas = sender as Canvas;
+            _dragStart = e.GetPosition(canvas);
             _dragging = true;
             StartPreviewShape();
         }
@@ -124,7 +162,8 @@ namespace FastScreeny
         private void OverlayCanvas_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (!_dragging || _previewShape == null) return;
-            var pos = e.GetPosition(OverlayCanvas);
+            var canvas = sender as Canvas;
+            var pos = e.GetPosition(canvas);
             UpdatePreviewShape(_dragStart, pos);
         }
 
@@ -137,6 +176,9 @@ namespace FastScreeny
 
         private void StartPreviewShape()
         {
+            // 确保Canvas尺寸正确
+            UpdateCanvasSizes();
+            
             var brush = CurrentBrush();
             switch (_currentTool)
             {
@@ -147,6 +189,7 @@ namespace FastScreeny
                         StrokeThickness = brush.Thickness,
                         Fill = System.Windows.Media.Brushes.Transparent
                     };
+                    OverlayCanvas.Children.Add(_previewShape);
                     break;
                 case Tool.Rect:
                     _previewShape = new System.Windows.Shapes.Rectangle
@@ -155,6 +198,7 @@ namespace FastScreeny
                         StrokeThickness = brush.Thickness,
                         Fill = System.Windows.Media.Brushes.Transparent
                     };
+                    OverlayCanvas.Children.Add(_previewShape);
                     break;
                 case Tool.Arrow:
                     _previewShape = new System.Windows.Shapes.Line
@@ -164,19 +208,11 @@ namespace FastScreeny
                         StrokeStartLineCap = System.Windows.Media.PenLineCap.Round,
                         StrokeEndLineCap = System.Windows.Media.PenLineCap.Triangle
                     };
-                    break;
-                case Tool.Crop:
-                    _previewShape = new System.Windows.Shapes.Rectangle
-                    {
-                        Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0x5B, 0x8D, 0xEF)),
-                        StrokeThickness = 2,
-                        Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(60, 0x5B, 0x8D, 0xEF))
-                    };
+                    OverlayCanvas.Children.Add(_previewShape);
                     break;
                 default:
                     return;
             }
-            OverlayCanvas.Children.Add(_previewShape);
         }
 
         private void UpdatePreviewShape(System.Windows.Point a, System.Windows.Point b)
@@ -207,6 +243,7 @@ namespace FastScreeny
         private void CommitPreviewShape()
         {
             if (_previewShape == null) return;
+            
             var rt = new System.Windows.Rect(System.Windows.Controls.Canvas.GetLeft(_previewShape), System.Windows.Controls.Canvas.GetTop(_previewShape), _previewShape.Width, _previewShape.Height);
 
             using (var g = Graphics.FromImage(_workingBitmap))
@@ -242,6 +279,9 @@ namespace FastScreeny
             BaseImage.Source = BitmapToImageSource(_workingBitmap);
             OverlayCanvas.Children.Remove(_previewShape);
             _previewShape = null;
+            
+            // 绘制完成后更新边框预览
+            UpdateBorderPreview();
         }
 
         private static System.Drawing.Color ToGdiColor(System.Windows.Media.Color color) => System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
@@ -336,6 +376,69 @@ namespace FastScreeny
                     BorderEndColorBox.Text = "#FF8B5CF6";
                     break;
             }
+            // 预设更改后也要更新预览
+            UpdateBorderPreview();
+        }
+
+        private void BorderSettings_Changed(object sender, RoutedEventArgs e)
+        {
+            UpdateBorderPreview();
+        }
+
+        private void UpdateBorderPreview()
+        {
+            try
+            {
+                // 在绘画模式下不显示边框预览
+                if (_drawingMode)
+                {
+                    PreviewImage.Visibility = Visibility.Collapsed;
+                    BaseImage.Visibility = Visibility.Visible;
+                    UpdateDrawingToolsState(true); // 启用绘图工具
+                    return;
+                }
+
+                if (EnableBorderCheck.IsChecked == true)
+                {
+                    // 创建预览设置
+                    var previewSettings = new AppSettings
+                    {
+                        EnableBorder = true,
+                        BorderThickness = int.TryParse(BorderThicknessBox.Text, out var thickness) ? thickness : 30,
+                        BorderGradientStart = string.IsNullOrWhiteSpace(BorderStartColorBox.Text) ? "#FF8B5CF6" : BorderStartColorBox.Text.Trim(),
+                        BorderGradientEnd = string.IsNullOrWhiteSpace(BorderEndColorBox.Text) ? "#FFEC4899" : BorderEndColorBox.Text.Trim()
+                    };
+
+                    // 生成带边框的预览图
+                    using var previewBitmap = ScreenCaptureService.ApplyOptionalBorder(_workingBitmap, previewSettings);
+                    PreviewImage.Source = BitmapToImageSource(previewBitmap);
+                    PreviewImage.Visibility = Visibility.Visible;
+                    BaseImage.Visibility = Visibility.Collapsed;
+                    UpdateDrawingToolsState(false); // 禁用绘图工具
+                }
+                else
+                {
+                    // 禁用边框时显示原图
+                    PreviewImage.Visibility = Visibility.Collapsed;
+                    BaseImage.Visibility = Visibility.Visible;
+                    UpdateDrawingToolsState(true); // 启用绘图工具
+                }
+            }
+            catch
+            {
+                // 如果预览出错，回退到原图
+                PreviewImage.Visibility = Visibility.Collapsed;
+                BaseImage.Visibility = Visibility.Visible;
+                UpdateDrawingToolsState(true); // 启用绘图工具
+            }
+        }
+
+        private void UpdateDrawingToolsState(bool enabled)
+        {
+            // 更新绘图工具按钮的启用状态
+            ToolCircleBtn.IsEnabled = enabled;
+            ToolRectBtn.IsEnabled = enabled;
+            ToolArrowBtn.IsEnabled = enabled;
         }
     }
 }

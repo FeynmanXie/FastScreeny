@@ -15,18 +15,48 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
+                        <Border x:Name="ButtonBorder" 
+                                Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <Border.RenderTransform>
+                                <TranslateTransform x:Name="ButtonTransform"/>
+                            </Border.RenderTransform>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#374151"/>
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#60A5FA"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" Value="#1F2937"/>
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#3B82F6"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonTransform" 
+                                                           Storyboard.TargetProperty="X"
+                                                           To="1" Duration="0:0:0.1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonTransform" 
+                                                           Storyboard.TargetProperty="Y"
+                                                           To="1" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonTransform" 
+                                                           Storyboard.TargetProperty="X"
+                                                           To="0" Duration="0:0:0.1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ButtonTransform" 
+                                                           Storyboard.TargetProperty="Y"
+                                                           To="0" Duration="0:0:0.1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -70,6 +100,7 @@
             <StackPanel>
                 <TextBlock Text="Drawing Tools" Foreground="#9AA4B2" FontSize="14" Margin="0,0,0,8"/>
                 <StackPanel Orientation="Horizontal">
+                    <Button x:Name="DrawingModeBtn" Content="🎨 Drawing Mode" Style="{StaticResource PrimaryButton}" Margin="0,0,16,0" Click="DrawingModeBtn_Click"/>
                     <TextBlock Text="Brush Preset" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <ComboBox x:Name="BrushPresetBox" Width="180" Margin="0,0,16,0"/>
                     <Button x:Name="ToolCircleBtn" Content="⭕ Circle" Style="{StaticResource ToolButton}" Margin="0,0,8,0" Click="ToolCircleBtn_Click"/>
@@ -89,13 +120,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <!-- 裁切工具 -->
-                <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <TextBlock Text="Crop Tools" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <Button x:Name="CropModeBtn" Content="✂️ Crop Mode" Style="{StaticResource ToolButton}" Margin="0,0,8,0" Click="CropModeBtn_Click"/>
-                    <Button x:Name="ApplyCropBtn" Content="✅ Apply" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Click="ApplyCropBtn_Click"/>
-                    <Button x:Name="CancelCropBtn" Content="❌ Cancel" Style="{StaticResource ToolButton}" Margin="0,0,0,0" Click="CancelCropBtn_Click"/>
-                </StackPanel>
+
                 
                 <!-- 边框设置 -->
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
@@ -113,9 +138,10 @@
         <!-- 编辑区域 -->
         <ScrollViewer Grid.Row="2" Background="#0F1115">
             <Grid x:Name="EditRoot" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="PreviewImage" Stretch="None" Visibility="Collapsed"/>
                 <Image x:Name="BaseImage" Stretch="None"/>
                 <Canvas x:Name="OverlayCanvas" Background="Transparent" MouseLeftButtonDown="OverlayCanvas_MouseLeftButtonDown" MouseMove="OverlayCanvas_MouseMove" MouseLeftButtonUp="OverlayCanvas_MouseLeftButtonUp"/>
-                <Canvas x:Name="CropCanvas" Background="Transparent" Visibility="Collapsed"/>
+
             </Grid>
         </ScrollViewer>
 

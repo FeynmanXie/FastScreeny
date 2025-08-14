@@ -1,20 +1,44 @@
-# Update 1.0
+# Update 1.0.1
 
-## 🚀 新特性
-- 初始发布版本
-- 支持区域截图（多显示器兼容）
-- 内置基础标注工具（箭头/方框/文字）
-- 自动保存为PNG格式
+## 🎨 New Features
+- **Enhanced Editor Interface**: Added visual button press feedback with smooth animations
+- **Drawing Mode**: New toggle button to temporarily disable border preview for drawing
+- **Improved Border Preview**: Real-time gradient border preview with instant updates
+- **Better Tool Management**: Simplified tool switching and state management
+- **Canvas Size Optimization**: Auto-adjusting canvas dimensions for better drawing experience
 
-## ⚙️ 技术升级
-- 迁移至 .NET 8 运行时
-- 重构图像处理核心（System.Drawing替代方案）
+## 🔧 Improvements
+- Removed crop mode functionality for simplified user experience
+- Enhanced button interactions with 1px press offset animation
+- Improved visual feedback with blue border highlights on hover/press
+- Better error handling in border preview generation
+- Optimized mouse event handling for drawing tools
 
-## 🐛 已知问题
-- 高DPI屏幕下编辑器界面缩放异常
-- 部分快捷键与系统冲突
+## 🐛 Bug Fixes
+- Fixed drawing shapes disappearing after release in border preview mode
+- Resolved conflicts between border preview and drawing functionality
+- Fixed canvas sizing issues that prevented proper shape drawing
+- Improved tool state synchronization
 
-## 📅 2023-12-01
-### 后续计划
-- 添加云存储集成（OneDrive/Google Drive）
-- 支持GIF录屏功能
+---
+
+# Update 1.0.0
+
+## 🚀 Initial Features
+- Initial release version
+- Region screenshot support (multi-monitor compatible)
+- Built-in annotation tools (arrows/rectangles/text)
+- Auto-save as PNG format
+
+## ⚙️ Technical Upgrades
+- Migrated to .NET 8 runtime
+- Refactored image processing core (System.Drawing alternatives)
+
+## 🐛 Known Issues
+- Editor interface scaling issues on high DPI screens
+- Some hotkeys conflict with system shortcuts
+
+## 📅 2025-01-14
+### Future Plans
+- Cloud storage integration (OneDrive/Google Drive)
+- GIF screen recording support

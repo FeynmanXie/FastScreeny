@@ -7,10 +7,10 @@ FastScreeny is a lightweight Windows screenshot tool designed for **fast capture
 ```mermaid
 pie
     title Feature Distribution
-    "Region Capture" : 40
-    "Image Editing" : 30
-    "System Integration" : 20
-    "Border Effects" : 10
+    "Region Capture" : 35
+    "Drawing Tools" : 30
+    "Border Effects" : 20
+    "System Integration" : 15
 ```
 
 ### 1. Smart Capture
@@ -23,14 +23,22 @@ pie
 ### 2. Instant Editor
 ```mermaid
 graph LR
-    A[Annotation Tools] --> B[Arrows/Boxes]
-    A --> C[Mosaic/Blur]
-    A --> D[Text Notes]
-    E[Image Processing] --> F[Crop/Rotate]
-    E --> G[Brightness Adjust]
+    A[Drawing Tools] --> B[Circle/Rectangle]
+    A --> C[Arrow Annotations]
+    A --> D[Brush Presets]
+    E[Border Effects] --> F[Gradient Borders]
+    E --> G[Real-time Preview]
+    H[Drawing Mode] --> I[Preview Toggle]
 ```
 
-### 3. Output Management
+### 3. Advanced Editor Features
+- **Drawing Mode Toggle**: Switch between preview and drawing modes instantly
+- **Interactive Button Feedback**: Visual press animations with 1px offset
+- **Real-time Border Preview**: Live gradient border effects with customizable colors
+- **Smart Tool Management**: Context-aware tool enabling/disabling
+- **Brush Presets**: Multiple color and thickness combinations
+
+### 4. Output Management
 - **Saving Strategies**:
   - Auto-sort by date
   - Custom filename templates (time variables supported)
@@ -42,21 +50,23 @@ graph LR
 ## ⚡ Tech Stack
 ```mermaid
 classDiagram
-    class CoreEngine{
+    class ScreenCaptureService{
         +CaptureRegion()
-        +ApplyEffects()
-        +SaveToDisk()
+        +ApplyOptionalBorder()
+        +SaveBitmapWithSettings()
     }
-    class EditorUI{
-        +AnnotationTools
-        +PreviewPane
+    class EditorWindow{
+        +DrawingTools
+        +BorderPreview
+        +DrawingModeToggle
     }
-    class SettingsManager{
-        +HotkeyConfig
+    class SettingsService{
+        +HotkeyManager
+        +AppSettings
         +StoragePaths
     }
-    CoreEngine <-- EditorUI
-    CoreEngine <-- SettingsManager
+    ScreenCaptureService <-- EditorWindow
+    ScreenCaptureService <-- SettingsService
 ```
 
 ## 📦 System Requirements
@@ -67,4 +77,4 @@ classDiagram
 | RAM | Min 500MB free |
 | GPU | DirectX 10+ support |
 
-> Note: This documentation corresponds to v1.0 initial release. Updates will be maintained in `docs/update_info.md`
+> Note: This documentation corresponds to v1.0.1 with enhanced editor features. Updates and changelog are maintained in `docs/update_info.md`
