@@ -1,139 +1,139 @@
-# FastScreeny 安装程序构建说明
+# FastScreeny Installer Build Instructions
 
-## 📦 构建环境要求
+## 📦 Build Environment Requirements
 
-### 必需组件
+### Required Components
 1. **.NET 8 SDK**
-   - 下载：https://dotnet.microsoft.com/download/dotnet/8.0
-   - 用于编译 C# 应用程序
+   - Download: https://dotnet.microsoft.com/download/dotnet/8.0
+   - Used to compile C# applications
 
-2. **Inno Setup 6**（构建安装程序需要）
-   - 下载：https://jrsoftware.org/isdl.php
-   - 免费的 Windows 安装程序制作工具
+2. **Inno Setup 6** (required for building installer)
+   - Download: https://jrsoftware.org/isdl.php
+   - Free Windows installer creation tool
 
-### 可选组件
-- **PowerShell 5.0+**（创建图标需要，Windows 10+ 默认已安装）
+### Optional Components
+- **PowerShell 5.0+** (needed for icon creation, pre-installed on Windows 10+)
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 方法1：一键构建（推荐）
+### Method 1: One-Click Build (Recommended)
 ```bash
-# 构建应用程序 + 安装程序（如果有 Inno Setup）
+# Build application + installer (if Inno Setup is available)
 quick_build.bat
 
-# 或者完整构建流程
+# Or full build process
 build_installer.bat
 ```
 
-### 方法2：分步构建
+### Method 2: Step-by-Step Build
 ```bash
-# 1. 只构建应用程序
+# 1. Build application only
 build_release.bat
 
-# 2. 构建安装程序（需要先完成步骤1）
+# 2. Build installer (requires step 1 to be completed first)
 build_installer.bat
 ```
 
-## 📁 输出文件
+## 📁 Output Files
 
-构建完成后，文件结构如下：
+After building, the file structure is as follows:
 ```
 FastScreeny/
-├── bin/Release/net8.0-windows/          # 应用程序输出
-│   ├── FastScreeny.exe                   # 主程序
+├── bin/Release/net8.0-windows/          # Application output
+│   ├── FastScreeny.exe                   # Main program
 │   ├── FastScreeny.dll
 │   └── ...
-├── dist/installer/                       # 安装程序输出
-│   └── FastScreeny_Setup_v1.0.0.exe    # 安装程序
-└── setup/                               # 安装程序资源
-    ├── app.ico                          # 应用图标
-    ├── LICENSE.txt                      # 许可证
-    └── README_INSTALL.txt               # 安装后说明
+├── dist/installer/                       # Installer output
+│   └── FastScreeny_Setup_v1.0.0.exe    # Installer
+└── setup/                               # Installer resources
+    ├── app.ico                          # Application icon
+    ├── LICENSE.txt                      # License
+    └── README_INSTALL.txt               # Post-installation instructions
 ```
 
-## ⚙️ 安装程序功能
+## ⚙️ Installer Features
 
-### 安装选项
-- ✅ **桌面快捷方式**：创建桌面图标
-- ✅ **开始菜单**：添加到开始菜单
-- ✅ **开机自启**：Windows 启动时自动运行
-- ✅ **右键菜单**：在文件管理器右键菜单添加快捷截图
+### Installation Options
+- ✅ **Desktop Shortcut**: Create desktop icon
+- ✅ **Start Menu**: Add to start menu
+- ✅ **Auto-start**: Automatically run when Windows starts
+- ✅ **Context Menu**: Add quick screenshot to file explorer right-click menu
 
-### 系统集成
-- 自动检测 .NET 8 Runtime
-- 智能停止正在运行的程序
-- 注册表清理（卸载时）
-- 创建用户文档目录
+### System Integration
+- Automatic .NET 8 Runtime detection
+- Intelligent stopping of running programs
+- Registry cleanup (during uninstall)
+- Create user documents directory
 
-### 卸载功能
-- 完全移除程序文件
-- 清理注册表项
-- 移除开机自启动
-- 保留用户截图文件
+### Uninstall Features
+- Complete removal of program files
+- Clean registry entries
+- Remove auto-start
+- Preserve user screenshot files
 
-## 🔧 自定义安装程序
+## 🔧 Customize Installer
 
-### 修改版本信息
-编辑 `setup/FastScreeny_Setup.iss`：
+### Modify Version Information
+Edit `setup/FastScreeny_Setup.iss`:
 ```ini
-AppVersion=1.0.0                    # 版本号
-OutputBaseFilename=FastScreeny_Setup_v1.0.0  # 输出文件名
+AppVersion=1.0.0                    # Version number
+OutputBaseFilename=FastScreeny_Setup_v1.0.0  # Output filename
 ```
 
-### 修改安装选项
-在 `[Tasks]` 部分调整默认选项：
+### Modify Installation Options
+Adjust default options in `[Tasks]` section:
 ```ini
-Name: "autostart"; Description: "开机自动启动(&A)"; GroupDescription: "系统集成:"; Flags: checkablealone
+Name: "autostart"; Description: "&Auto-start on boot"; GroupDescription: "System Integration:"; Flags: checkablealone
 ```
-- 添加 `checked` 标志：默认选中
-- 添加 `unchecked` 标志：默认不选中
+- Add `checked` flag: Default selected
+- Add `unchecked` flag: Default unselected
 
-### 添加自定义文件
-在 `[Files]` 部分添加：
+### Add Custom Files
+Add to `[Files]` section:
 ```ini
 Source: "path\to\your\file"; DestDir: "{app}"; Flags: ignoreversion
 ```
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### 常见问题
+### Common Issues
 
-**1. "未找到 .NET SDK"**
-- 解决：安装 .NET 8 SDK 并重启命令提示符
+**1. ".NET SDK not found"**
+- Solution: Install .NET 8 SDK and restart command prompt
 
-**2. "未找到 Inno Setup"**
-- 解决：下载并安装 Inno Setup 6，确保安装到默认路径
+**2. "Inno Setup not found"**
+- Solution: Download and install Inno Setup 6, ensure installation to default path
 
-**3. "编译失败"**
-- 检查项目文件是否完整
-- 确保没有语法错误
-- 尝试手动运行 `dotnet build -c Release`
+**3. "Build failed"**
+- Check if project files are complete
+- Ensure no syntax errors
+- Try manually running `dotnet build -c Release`
 
-**4. "图标创建失败"**
-- PowerShell 执行策略限制：运行 `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-- 或手动放置 `app.ico` 文件到 `setup/` 目录
+**4. "Icon creation failed"**
+- PowerShell execution policy restriction: Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+- Or manually place `app.ico` file in `setup/` directory
 
-### 日志调试
+### Debug Logging
 
-如果安装程序构建失败，可以查看详细日志：
+If installer build fails, you can view detailed logs:
 ```bash
-# 启用详细输出
+# Enable verbose output
 ISCC.exe /O+ "setup\FastScreeny_Setup.iss"
 ```
 
-## 📋 发布检查清单
+## 📋 Release Checklist
 
-发布前请确认：
-- [ ] 应用程序正常启动和运行
-- [ ] 所有功能测试通过
-- [ ] 版本号已更新
-- [ ] 安装程序可以正常安装和卸载
-- [ ] 开机自启动功能正常
-- [ ] 右键菜单功能正常
-- [ ] 文档和许可证文件正确
+Before release, please confirm:
+- [ ] Application starts and runs normally
+- [ ] All functionality tests pass
+- [ ] Version number updated
+- [ ] Installer can install and uninstall normally
+- [ ] Auto-start functionality works
+- [ ] Right-click menu functionality works
+- [ ] Documentation and license files are correct
 
-## 🔗 相关链接
+## 🔗 Related Links
 
-- [Inno Setup 官方文档](https://jrsoftware.org/ishelp/)
-- [.NET 8 下载](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [FastScreeny 项目主页](https://github.com/fastscreeny/fastscreeny)
+- [Inno Setup Official Documentation](https://jrsoftware.org/ishelp/)
+- [.NET 8 Download](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [FastScreeny Project Homepage](https://github.com/fastscreeny/fastscreeny)

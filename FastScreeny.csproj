@@ -9,6 +9,7 @@
     <AssemblyName>FastScreeny</AssemblyName>
     <RootNamespace>FastScreeny</RootNamespace>
     <EnableDefaultItems>false</EnableDefaultItems>
+    <ApplicationIcon>public\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +33,10 @@
     <Page Include="SettingsWindow.xaml" />
     <Page Include="OverlaySelectionWindow.xaml" />
     <Page Include="EditorWindow.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="public\favicon.ico" />
   </ItemGroup>
 
 </Project>

@@ -1,31 +1,31 @@
-🎉 FastScreeny 安装完成！
+🎉 FastScreeny Installation Complete!
 
-感谢您选择 FastScreeny 快速截图工具！
+Thank you for choosing FastScreeny Screenshot Tool!
 
-🚀 快速开始：
-• 默认快捷键：Ctrl+Alt+A 开始区域截图
-• 右键点击系统托盘图标可进入设置
-• 双击托盘图标快速打开设置窗口
+🚀 Quick Start:
+• Default hotkey: Ctrl+Alt+A to start region screenshot
+• Right-click system tray icon to access settings
+• Double-click tray icon to quickly open settings window
 
-✨ 主要功能：
-• 区域截图：拖拽选择任意区域进行截图
-• 编辑模式：支持圆圈、方形、箭头标注工具
-• 渐变边框：多种预设边框效果，让截图更美观
-• 裁切功能：在编辑器中精确裁切图片
-• 自动保存：截图自动保存到"我的文档\FastScreeny"
-• 剪贴板：可选择自动复制到剪贴板
+✨ Main Features:
+• Region Screenshot: Drag to select any area for screenshot
+• Edit Mode: Support circle, rectangle, arrow annotation tools
+• Gradient Borders: Multiple preset border effects to make screenshots more beautiful
+• Crop Function: Precisely crop images in the editor
+• Auto Save: Screenshots automatically saved to "Documents\FastScreeny"
+• Clipboard: Option to automatically copy to clipboard
 
-⚙️ 系统要求：
-• Windows 10 版本 1809 或更高版本
-• .NET 8 Desktop Runtime（如未安装请访问：https://dotnet.microsoft.com/download）
+⚙️ System Requirements:
+• Windows 10 version 1809 or higher
+• .NET 8 Desktop Runtime (if not installed, visit: https://dotnet.microsoft.com/download)
 
-📝 使用提示：
-• 在设置中可以自定义快捷键
-• 支持开机自启动
-• 可以设置默认截图模式（直接保存或编辑模式）
-• 边框效果不会影响原图内容，只在外围添加装饰
+📝 Usage Tips:
+• You can customize hotkeys in settings
+• Support auto-start on boot
+• Can set default screenshot mode (direct save or edit mode)
+• Border effects don't affect original image content, only add decoration around edges
 
-🔧 问题反馈：
-如果遇到任何问题，请访问：https://github.com/fastscreeny/fastscreeny/issues
+🔧 Issue Feedback:
+If you encounter any problems, please visit: https://github.com/fastscreeny/fastscreeny/issues
 
-祝您使用愉快！
+Enjoy using FastScreeny!

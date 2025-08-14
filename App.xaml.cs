@@ -1,4 +1,7 @@
 using System;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using WinForms = System.Windows.Forms;
 using FastScreeny.Services;
@@ -45,7 +48,7 @@ namespace FastScreeny
             _notifyIcon = new WinForms.NotifyIcon
             {
                 Text = "FastScreeny",
-                Icon = System.Drawing.SystemIcons.Application,
+                Icon = LoadIconFromResource(),
                 Visible = true
             };
 
@@ -104,6 +107,24 @@ namespace FastScreeny
             _notifyIcon!.Visible = false;
             _hotkeyManager?.Dispose();
             Shutdown();
+        }
+
+        private Icon LoadIconFromResource()
+        {
+            try
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                using var stream = assembly.GetManifestResourceStream("FastScreeny.public.favicon.ico");
+                if (stream != null)
+                {
+                    return new Icon(stream);
+                }
+            }
+            catch
+            {
+                // Fallback to system icon if loading fails
+            }
+            return SystemIcons.Application;
         }
     }
 }
