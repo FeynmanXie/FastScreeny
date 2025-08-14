@@ -24,3 +24,4 @@ D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Release\net8.0-windows\FastSc
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Release\net8.0-windows\ref\FastScreeny.dll
 d:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Release\net8.0-windows\EditorWindow.baml
 d:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Release\net8.0-windows\EditorWindow.g.cs
+D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Release\net8.0-windows\FastScreeny.sourcelink.json

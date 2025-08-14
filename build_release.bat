@@ -8,16 +8,16 @@ cd /d "%SCRIPT_DIR%"
 
 where dotnet >nul 2>&1
 if %errorlevel% neq 0 (
-  echo [.NET SDK] 未安装或未加入 PATH，请先安装 .NET 8 SDK。
+  echo [.NET SDK] Not installed or not in PATH, please install .NET 8 SDK first.
   exit /b 1
 )
 
-rem 如果程序正在运行，先结束以避免文件被占用
+rem If app is running, kill it first to avoid file locks
 tasklist /FI "IMAGENAME eq FastScreeny.exe" | find /I "FastScreeny.exe" >nul
 if %errorlevel% equ 0 (
-  echo 检测到 FastScreeny 正在运行，尝试结束进程...
+  echo FastScreeny is running, attempting to kill process...
   taskkill /IM FastScreeny.exe /F >nul 2>&1
-  rem 等待进程完全退出
+  rem Wait for process to fully exit
   :wait_exit
   tasklist /FI "IMAGENAME eq FastScreeny.exe" | find /I "FastScreeny.exe" >nul
   if %errorlevel% equ 0 (
@@ -26,26 +26,24 @@ if %errorlevel% equ 0 (
   )
 )
 
-echo [1/2] 正在还原依赖...
+echo [1/2] Restoring dependencies...
 dotnet restore
 if %errorlevel% neq 0 goto :error
 
-echo [2/2] 正在编译 Release...
+echo [2/2] Building Release...
 dotnet build -c Release --no-restore
 if %errorlevel% neq 0 goto :error
 
 set "OUT=bin\Release\net8.0-windows\FastScreeny.exe"
-echo 构建成功: "%CD%\%OUT%"
+echo Build successful: "%CD%\%OUT%"
 
 if "%1"=="run" (
-  echo 正在运行...
+  echo Running...
   "%OUT%" --background
 )
 
 exit /b 0
 
 :error
-echo 构建失败，错误码 %errorlevel% 。
+echo Build failed with error code %errorlevel%.
 exit /b %errorlevel%
-
-

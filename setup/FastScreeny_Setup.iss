@@ -10,8 +10,8 @@ AppUpdatesURL=https://github.com/FeynmanXie/FastScreeny/releases
 DefaultDirName={autopf}\FastScreeny
 DefaultGroupName=FastScreeny
 AllowNoIcons=yes
-LicenseFile=setup\LICENSE.txt
-InfoAfterFile=setup\README_INSTALL.txt
+LicenseFile=LICENSE.txt
+InfoAfterFile=README_INSTALL.txt
 OutputDir=dist\installer
 OutputBaseFilename=FastScreeny_Setup_v1.0.0
 Compression=lzma
@@ -26,7 +26,7 @@ ArchitecturesInstallIn64BitMode=x64
 ; Installation Options
 PrivilegesRequired=admin
 DisableProgramGroupPage=yes
-SetupIconFile=setup\app.ico
+SetupIconFile=app.ico
 
 ; Uninstall
 UninstallDisplayIcon={app}\FastScreeny.exe
@@ -44,17 +44,17 @@ Name: "contextmenu"; Description: "Add &context menu screenshot"; GroupDescripti
 
 [Files]
 ; Main program files
-Source: "bin\Release\net8.0-windows\FastScreeny.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net8.0-windows\FastScreeny.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net8.0-windows\FastScreeny.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net8.0-windows\FastScreeny.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net8.0-windows\FastScreeny.pdb"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "..\bin\Release\net8.0-windows\FastScreeny.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\net8.0-windows\FastScreeny.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\net8.0-windows\FastScreeny.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\net8.0-windows\FastScreeny.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\bin\Release\net8.0-windows\FastScreeny.pdb"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
 
 ; Documentation files
-Source: "docs\README.md"; DestDir: "{app}\docs"; Flags: ignoreversion
-Source: "docs\update_info.md"; DestDir: "{app}\docs"; Flags: ignoreversion
-Source: "setup\README_INSTALL.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "setup\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\docs\README.md"; DestDir: "{app}\docs"; Flags: ignoreversion
+Source: "..\docs\update_info.md"; DestDir: "{app}\docs"; Flags: ignoreversion
+Source: "README_INSTALL.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 ; Start Menu

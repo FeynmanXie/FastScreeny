@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj": {}
+    "D:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj": {}
   },
   "projects": {
-    "d:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj": {
+    "D:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj",
+        "projectUniqueName": "D:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj",
         "projectName": "FastScreeny",
-        "projectPath": "d:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj",
+        "projectPath": "D:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\FastScreeny.csproj",
         "packagesPath": "C:\\Users\\Feynm\\.nuget\\packages\\",
-        "outputPath": "d:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\obj\\",
+        "outputPath": "D:\\codes\\apps\\win\\mul-fast-screeny\\FastScreeny\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Feynm\\AppData\\Roaming\\NuGet\\NuGet.Config"
