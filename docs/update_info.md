@@ -1,3 +1,20 @@
+# Update 1.0.2
+
+## 🎨 New Features
+- **File Structure Refactor**: Reorganized project file structure for better categorization
+- **Transparent Overlay Optimization**: Improved visual effects of region selection overlay
+
+## 🔧 Improvements
+- Removed semi-transparent background of overlay for full screen visibility
+- Enhanced border display effect of selection area
+- No admin requirement anymore for the setup exe
+
+## 🐛 Bug Fixes
+- Fixed mouse event capture issue during region selection
+- Resolved overlay display anomalies on certain resolutions
+
+---
+
 # Update 1.0.1
 
 ## 🎨 New Features
