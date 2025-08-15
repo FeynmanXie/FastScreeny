@@ -9,34 +9,34 @@
     <AssemblyName>FastScreeny</AssemblyName>
     <RootNamespace>FastScreeny</RootNamespace>
     <EnableDefaultItems>false</EnableDefaultItems>
-    <ApplicationIcon>public\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>assets\icons\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="App.xaml.cs" />
-    <Compile Include="MainWindow.xaml.cs" />
-    <Compile Include="SettingsWindow.xaml.cs" />
-    <Compile Include="OverlaySelectionWindow.xaml.cs" />
-    <Compile Include="EditorWindow.xaml.cs" />
-    <Compile Include="Services\ScreenCaptureService.cs" />
-    <Compile Include="Services\HotkeyManager.cs" />
-    <Compile Include="Services\AutoStartManager.cs" />
-    <Compile Include="Services\SettingsService.cs" />
-    <Compile Include="Services\StoragePaths.cs" />
-    <Compile Include="Models\AppSettings.cs" />
-    <Compile Include="Models\Hotkey.cs" />
+    <Compile Include="src\App.xaml.cs" />
+    <Compile Include="src\Views\MainWindow.xaml.cs" />
+    <Compile Include="src\Views\SettingsWindow.xaml.cs" />
+    <Compile Include="src\Views\OverlaySelectionWindow.xaml.cs" />
+    <Compile Include="src\Views\EditorWindow.xaml.cs" />
+    <Compile Include="src\Services\ScreenCaptureService.cs" />
+    <Compile Include="src\Services\HotkeyManager.cs" />
+    <Compile Include="src\Services\AutoStartManager.cs" />
+    <Compile Include="src\Services\SettingsService.cs" />
+    <Compile Include="src\Services\StoragePaths.cs" />
+    <Compile Include="src\Models\AppSettings.cs" />
+    <Compile Include="src\Models\Hotkey.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml" />
-    <Page Include="MainWindow.xaml" />
-    <Page Include="SettingsWindow.xaml" />
-    <Page Include="OverlaySelectionWindow.xaml" />
-    <Page Include="EditorWindow.xaml" />
+    <ApplicationDefinition Include="src\App.xaml" />
+    <Page Include="src\Views\MainWindow.xaml" />
+    <Page Include="src\Views\SettingsWindow.xaml" />
+    <Page Include="src\Views\OverlaySelectionWindow.xaml" />
+    <Page Include="src\Views\EditorWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="public\favicon.ico" />
+    <EmbeddedResource Include="assets\icons\favicon.ico" />
   </ItemGroup>
 
 </Project>
