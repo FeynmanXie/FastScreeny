@@ -1,3 +1,25 @@
+# Update 1.0.3
+
+## 🎨 New Features
+- **Auto-Update System**: Comprehensive automatic update functionality with GitHub integration
+- **ZIP Update Support**: Optimized update process using ZIP files for faster downloads
+- **Multi-Format Updates**: Support for both ZIP archives and EXE installers
+- **Smart Update Detection**: Intelligent version comparison and update availability checking
+
+## 🔧 Improvements
+- Enhanced update UI with progress tracking and detailed version information
+- Automatic and manual update check options with configurable intervals
+- Streamlined update process with batch file automation for seamless replacement
+- Full English localization for all update-related UI and notifications
+- Improved error handling and user feedback during update operations
+
+## 🐛 Bug Fixes
+- Resolved namespace conflicts in MessageBox references
+- Fixed update file format detection and handling
+- Improved application restart reliability after updates
+
+---
+
 # Update 1.0.2
 
 ## 🎨 New Features

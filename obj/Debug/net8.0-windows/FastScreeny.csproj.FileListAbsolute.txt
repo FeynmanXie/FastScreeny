@@ -25,3 +25,5 @@ D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\refint\F
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\FastScreeny.pdb
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\FastScreeny.genruntimeconfig.cache
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\ref\FastScreeny.dll
+d:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\UpdateWindow.baml
+d:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\UpdateWindow.g.cs

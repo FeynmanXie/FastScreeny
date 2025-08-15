@@ -44,6 +44,18 @@
                 <CheckBox x:Name="DefaultOpenInEditorCheck" Content="Default to editor mode (otherwise save directly)" Foreground="#E5E7EB"/>
 
                 <Separator Margin="0,16,0,12"/>
+                <TextBlock Text="Auto Update" Foreground="#9AA4B2" Margin="0,0,0,6"/>
+                <CheckBox x:Name="AutoCheckUpdatesCheck" Content="Automatically check for updates" Foreground="#E5E7EB"/>
+                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                    <TextBlock Text="Check interval (hours)" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="UpdateIntervalBox" Width="96"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                    <TextBlock Text="Last check time" Foreground="#9AA4B2" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock x:Name="LastUpdateCheckText" Text="Never" Foreground="#E5E7EB" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <Separator Margin="0,16,0,12"/>
                 <TextBlock Text="Border (non-intrusive, drawn around content)" Foreground="#9AA4B2" Margin="0,0,0,6"/>
                 <CheckBox x:Name="EnableBorderCheck" Content="Enable gradient border" Foreground="#E5E7EB"/>
                 <StackPanel Orientation="Horizontal" Margin="0,6,0,0">

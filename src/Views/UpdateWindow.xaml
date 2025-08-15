@@ -1,0 +1,135 @@
+<Window x:Class="FastScreeny.Views.UpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Software Update" Height="480" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Icon="/assets/icons/favicon.ico">
+    
+    <Window.Resources>
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF4B79A1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF6699CC"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF336699"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0" Text="New Version Available" 
+                   FontSize="18" FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,0,0,15"/>
+
+        <!-- 版本信息 -->
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Current Version:" FontWeight="Bold" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CurrentVersionText" Text="1.0.0" Margin="0,0,0,5"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Latest Version:" FontWeight="Bold" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LatestVersionText" Text="1.0.1" Margin="0,0,0,5"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Release Date:" FontWeight="Bold" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="PublishDateText" Text="2025-01-01" Margin="0,0,0,5"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="File Size:" FontWeight="Bold" Margin="0,0,10,5"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="FileSizeText" Text="10 MB" Margin="0,0,0,5"/>
+        </Grid>
+
+        <!-- 更新说明标题 -->
+        <TextBlock Grid.Row="2" Text="Release Notes:" FontWeight="Bold" Margin="0,0,0,5"/>
+
+        <!-- 更新说明内容 -->
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" 
+                      BorderBrush="#CCCCCC" BorderThickness="1" 
+                      Margin="0,0,0,15">
+            <TextBlock x:Name="ReleaseNotesText" 
+                       Text="Loading release notes..." 
+                       Padding="10"
+                       TextWrapping="Wrap"
+                       FontFamily="Consolas"/>
+        </ScrollViewer>
+
+        <!-- 下载进度 -->
+        <Grid Grid.Row="4" x:Name="ProgressPanel" Visibility="Collapsed" Margin="0,0,0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" x:Name="ProgressText" Text="Preparing download..." Margin="0,0,0,5"/>
+            <ProgressBar Grid.Row="1" x:Name="DownloadProgressBar" Height="20" Minimum="0" Maximum="100"/>
+        </Grid>
+
+        <!-- 按钮区域 -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button x:Name="DownloadButton" 
+                    Content="Update Now" 
+                    Style="{StaticResource ModernButton}"
+                    Click="DownloadButton_Click"/>
+            <Button x:Name="LaterButton" 
+                    Content="Remind Later" 
+                    Style="{StaticResource ModernButton}"
+                    Background="#FF999999"
+                    Click="LaterButton_Click"/>
+            <Button x:Name="SkipButton" 
+                    Content="Skip Version" 
+                    Style="{StaticResource ModernButton}"
+                    Background="#FFCC6666"
+                    Click="SkipButton_Click"/>
+        </StackPanel>
+
+        <!-- 状态信息 -->
+        <TextBlock Grid.Row="6" x:Name="StatusText" 
+                   Text="Click Update Now to download the new version" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,10,0,0"
+                   FontSize="11"
+                   Foreground="#FF666666"/>
+    </Grid>
+</Window>

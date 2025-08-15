@@ -7,7 +7,7 @@ AppPublisher=FeynmanXie
 AppPublisherURL=https://github.com/FeynmanXie/FastScreeny
 AppSupportURL=https://github.com/FeynmanXie/FastScreeny/issues
 AppUpdatesURL=https://github.com/FeynmanXie/FastScreeny/releases
-DefaultDirName={autopf}\FastScreeny
+DefaultDirName={userappdata}\FastScreeny
 DefaultGroupName=FastScreeny
 AllowNoIcons=yes
 LicenseFile=LICENSE.txt
@@ -24,7 +24,7 @@ ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 
 ; Installation Options
-PrivilegesRequired=admin
+PrivilegesRequired=lowest
 DisableProgramGroupPage=yes
 SetupIconFile=app.ico
 
@@ -81,9 +81,9 @@ Filename: "taskkill"; Parameters: "/f /im FastScreeny.exe"; Flags: runhidden; Ru
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "FastScreeny"; ValueData: "{app}\FastScreeny.exe --background"; Flags: uninsdeletevalue; Tasks: autostart
 
 ; Context menu
-Root: HKCR; Subkey: "Directory\Background\shell\FastScreeny"; ValueType: string; ValueData: "FastScreeny Screenshot"; Flags: uninsdeletekey; Tasks: contextmenu
-Root: HKCR; Subkey: "Directory\Background\shell\FastScreeny"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\FastScreeny.exe,0"; Flags: uninsdeletekey; Tasks: contextmenu
-Root: HKCR; Subkey: "Directory\Background\shell\FastScreeny\command"; ValueType: string; ValueData: "{app}\FastScreeny.exe"; Flags: uninsdeletekey; Tasks: contextmenu
+Root: HKCU; Subkey: "Software\Classes\Directory\Background\shell\FastScreeny"; ValueType: string; ValueData: "FastScreeny Screenshot"; Flags: uninsdeletekey; Tasks: contextmenu
+Root: HKCU; Subkey: "Software\Classes\Directory\Background\shell\FastScreeny"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\FastScreeny.exe,0"; Flags: uninsdeletekey; Tasks: contextmenu
+Root: HKCU; Subkey: "Software\Classes\Directory\Background\shell\FastScreeny\command"; ValueType: string; ValueData: "{app}\FastScreeny.exe"; Flags: uninsdeletekey; Tasks: contextmenu
 
 [Code]
 // Check .NET 8 Desktop Runtime

@@ -23,6 +23,14 @@ namespace FastScreeny
             AutoCopyCheck.IsChecked = _settingsService.Settings.AutoCopyToClipboard;
             LaunchOnStartupCheck.IsChecked = _settingsService.Settings.LaunchOnStartup;
             DefaultOpenInEditorCheck.IsChecked = _settingsService.Settings.DefaultOpenInEditor;
+            
+            // 自动更新设置
+            AutoCheckUpdatesCheck.IsChecked = _settingsService.Settings.AutoCheckUpdates;
+            UpdateIntervalBox.Text = _settingsService.Settings.UpdateCheckIntervalHours.ToString();
+            LastUpdateCheckText.Text = _settingsService.Settings.LastUpdateCheck == DateTime.MinValue 
+                ? "Never" 
+                : _settingsService.Settings.LastUpdateCheck.ToString("yyyy-MM-dd HH:mm:ss");
+            
             InitBorderPresets();
             EnableBorderCheck.IsChecked = _settingsService.Settings.EnableBorder;
             BorderThicknessBox.Text = _settingsService.Settings.BorderThickness.ToString();
@@ -72,6 +80,14 @@ namespace FastScreeny
             _settingsService.Settings.AutoCopyToClipboard = AutoCopyCheck.IsChecked == true;
             _settingsService.Settings.LaunchOnStartup = LaunchOnStartupCheck.IsChecked == true;
             _settingsService.Settings.DefaultOpenInEditor = DefaultOpenInEditorCheck.IsChecked == true;
+            
+            // 保存自动更新设置
+            _settingsService.Settings.AutoCheckUpdates = AutoCheckUpdatesCheck.IsChecked == true;
+            if (int.TryParse(UpdateIntervalBox.Text, out var hours) && hours >= 1 && hours <= 168) // 1小时到1周
+            {
+                _settingsService.Settings.UpdateCheckIntervalHours = hours;
+            }
+            
             _settingsService.Settings.EnableBorder = EnableBorderCheck.IsChecked == true;
             if (int.TryParse(BorderThicknessBox.Text, out var px) && px >= 0 && px <= 512) {
                 _settingsService.Settings.BorderThickness = px;

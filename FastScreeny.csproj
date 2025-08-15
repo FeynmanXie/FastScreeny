@@ -10,6 +10,10 @@
     <RootNamespace>FastScreeny</RootNamespace>
     <EnableDefaultItems>false</EnableDefaultItems>
     <ApplicationIcon>assets\icons\favicon.ico</ApplicationIcon>
+    <!-- 版本信息，用于自动更新版本比较 -->
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,13 +22,16 @@
     <Compile Include="src\Views\SettingsWindow.xaml.cs" />
     <Compile Include="src\Views\OverlaySelectionWindow.xaml.cs" />
     <Compile Include="src\Views\EditorWindow.xaml.cs" />
+    <Compile Include="src\Views\UpdateWindow.xaml.cs" />
     <Compile Include="src\Services\ScreenCaptureService.cs" />
     <Compile Include="src\Services\HotkeyManager.cs" />
     <Compile Include="src\Services\AutoStartManager.cs" />
     <Compile Include="src\Services\SettingsService.cs" />
     <Compile Include="src\Services\StoragePaths.cs" />
+    <Compile Include="src\Services\AutoUpdateService.cs" />
     <Compile Include="src\Models\AppSettings.cs" />
     <Compile Include="src\Models\Hotkey.cs" />
+    <Compile Include="src\Models\UpdateInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +40,7 @@
     <Page Include="src\Views\SettingsWindow.xaml" />
     <Page Include="src\Views\OverlaySelectionWindow.xaml" />
     <Page Include="src\Views\EditorWindow.xaml" />
+    <Page Include="src\Views\UpdateWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>

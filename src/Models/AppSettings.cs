@@ -17,6 +17,10 @@ namespace FastScreeny.Models
         public string BorderPreset { get; set; } = "Custom";
         // Default capture mode: direct save or open in editor
         public bool DefaultOpenInEditor { get; set; } = false;
+        // Auto-update settings
+        public bool AutoCheckUpdates { get; set; } = true;
+        public DateTime LastUpdateCheck { get; set; } = DateTime.MinValue;
+        public int UpdateCheckIntervalHours { get; set; } = 24;
     }
 }
 
