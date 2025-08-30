@@ -11,9 +11,9 @@
     <EnableDefaultItems>false</EnableDefaultItems>
     <ApplicationIcon>assets\icons\favicon.ico</ApplicationIcon>
     <!-- 版本信息，用于自动更新版本比较 -->
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,11 +4,67 @@
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
         Background="#01000000" ShowInTaskbar="False" Topmost="True"
         WindowStartupLocation="Manual" Width="800" Height="600" Opacity="1">
+    
+    <Window.Resources>
+        <!-- 现代化选择框样式 -->
+        <Style x:Key="ModernSelectionRect" TargetType="Rectangle">
+            <Setter Property="Stroke">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#60a5fa" Offset="0"/>
+                        <GradientStop Color="#3b82f6" Offset="0.5"/>
+                        <GradientStop Color="#1d4ed8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="StrokeThickness" Value="3"/>
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="StrokeDashArray" Value="8,4"/>
+        </Style>
+    </Window.Resources>
+    
     <Canvas x:Name="CanvasRoot">
-        <Rectangle x:Name="SelectionRect" Stroke="#5B8DEF" StrokeThickness="2" Fill="Transparent" Visibility="Collapsed"/>
-        <TextBlock x:Name="Hint" Foreground="Black" FontSize="14" Margin="16" Background="White" Padding="8,4" Opacity="0.8">
-            Drag to select area, Enter to confirm, Esc to cancel
-        </TextBlock>
+        <Rectangle x:Name="SelectionRect" Style="{StaticResource ModernSelectionRect}" Visibility="Collapsed"/>
+        
+        <!-- 现代化提示框 -->
+        <Border x:Name="HintBorder" Background="#1f2937" CornerRadius="12" Margin="20" Opacity="0.95">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" BlurRadius="15" ShadowDepth="3" Opacity="0.5"/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal" Margin="16,12">
+                <Border Background="#3b82f6" CornerRadius="4" Padding="8,4" Margin="0,0,12,0">
+                    <TextBlock Text="📷" Foreground="White" FontSize="14"/>
+                </Border>
+                <StackPanel>
+                    <TextBlock x:Name="Hint" Foreground="#f9fafb" FontSize="14" FontWeight="Medium" Margin="0,0,0,2">
+                        Drag to select screenshot area
+                    </TextBlock>
+                    <TextBlock Foreground="#9ca3af" FontSize="11">
+                        Enter to confirm • Esc to cancel
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        
+        <!-- 角标指示器 -->
+        <Canvas x:Name="CornerIndicators" Visibility="Collapsed">
+            <!-- 左上角 -->
+            <Border Canvas.Left="0" Canvas.Top="0" Background="#3b82f6" CornerRadius="0,0,4,0" Padding="4">
+                <TextBlock Text="↖" Foreground="White" FontSize="10"/>
+            </Border>
+            <!-- 右上角 -->
+            <Border Canvas.Right="0" Canvas.Top="0" Background="#3b82f6" CornerRadius="0,0,0,4" Padding="4">
+                <TextBlock Text="↗" Foreground="White" FontSize="10"/>
+            </Border>
+            <!-- 左下角 -->
+            <Border Canvas.Left="0" Canvas.Bottom="0" Background="#3b82f6" CornerRadius="0,4,0,0" Padding="4">
+                <TextBlock Text="↙" Foreground="White" FontSize="10"/>
+            </Border>
+            <!-- 右下角 -->
+            <Border Canvas.Right="0" Canvas.Bottom="0" Background="#3b82f6" CornerRadius="4,0,0,0" Padding="4">
+                <TextBlock Text="↘" Foreground="White" FontSize="10"/>
+            </Border>
+        </Canvas>
     </Canvas>
 </Window>
 

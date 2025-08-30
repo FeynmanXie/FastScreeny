@@ -2,7 +2,7 @@
 ; Application Information
 AppId={{8B5CF6A0-EC48-4899-A123-456789ABCDEF}
 AppName=FastScreeny
-AppVersion=1.0.2
+AppVersion=1.0.3
 AppPublisher=FeynmanXie
 AppPublisherURL=https://github.com/FeynmanXie/FastScreeny
 AppSupportURL=https://github.com/FeynmanXie/FastScreeny/issues
@@ -13,7 +13,7 @@ AllowNoIcons=yes
 LicenseFile=LICENSE.txt
 InfoAfterFile=README_INSTALL.txt
 OutputDir=dist\installer
-OutputBaseFilename=fs-setup_v1.0.2
+OutputBaseFilename=fs-setup_v1.0.3
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

@@ -17,6 +17,7 @@
 - Resolved namespace conflicts in MessageBox references
 - Fixed update file format detection and handling
 - Improved application restart reliability after updates
+- Fix the admin requirement for setups
 
 ---
 
