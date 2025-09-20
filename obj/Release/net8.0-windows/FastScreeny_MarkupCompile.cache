@@ -1,5 +1,5 @@
 ﻿FastScreeny
-1.0.2.0
+1.0.4.0
 
 winexe
 C#
@@ -12,7 +12,7 @@ TRACE;RELEASE;NET;NET8_0;NETCOREAPP
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\src\App.xaml
 51183530771
 
-16-241149654
+17-1813463598
 207-616023269
 src\Views\MainWindow.xaml;src\Views\SettingsWindow.xaml;src\Views\OverlaySelectionWindow.xaml;src\Views\EditorWindow.xaml;src\Views\UpdateWindow.xaml;
 

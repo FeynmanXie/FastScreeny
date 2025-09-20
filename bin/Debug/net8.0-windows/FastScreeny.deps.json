@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "FastScreeny/1.0.3": {
+      "FastScreeny/1.0.4": {
         "runtime": {
           "FastScreeny.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "FastScreeny/1.0.3": {
+    "FastScreeny/1.0.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

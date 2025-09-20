@@ -24,6 +24,16 @@ namespace FastScreeny
 
             _settingsService = new SettingsService();
             _settingsService.Load();
+            
+            // 处理管理员权限启动
+            var adminManager = AdminPrivilegeManager.Instance;
+            bool isElevatedStartup = adminManager.HandleElevatedStartup(e.Args);
+            
+            // 如果是以管理员权限启动，更新托盘图标标题以显示管理员状态
+            if (adminManager.IsElevated)
+            {
+                System.Diagnostics.Debug.WriteLine("Application running with elevated privileges");
+            }
 
             _hotkeyManager = new HotkeyManager(Current);
             
@@ -32,7 +42,7 @@ namespace FastScreeny
             _autoUpdateService.UpdateAvailable += OnUpdateAvailable;
 
             bool runInBackground = e.Args != null && Array.Exists(e.Args, a => string.Equals(a, "--background", StringComparison.OrdinalIgnoreCase));
-            if (!runInBackground)
+            if (!runInBackground && !isElevatedStartup)
             {
                 ShowSettings();
             }
@@ -55,9 +65,14 @@ namespace FastScreeny
 
         private void InitializeTray()
         {
+            var adminManager = AdminPrivilegeManager.Instance;
+            var trayText = adminManager.IsElevated 
+                ? "FastScreeny (Administrator)" 
+                : "FastScreeny";
+                
             _notifyIcon = new WinForms.NotifyIcon
             {
-                Text = "FastScreeny",
+                Text = trayText,
                 Icon = LoadIconFromResource(),
                 Visible = true
             };
@@ -89,6 +104,31 @@ namespace FastScreeny
             if (!ok)
             {
                 _notifyIcon?.ShowBalloonTip(3000, "Hotkey Registration Failed", $"{_settingsService.Settings.HotkeyRegion} may be occupied by other programs or requires administrator privileges.", WinForms.ToolTipIcon.Warning);
+            }
+
+            // 注册特殊快捷键: Alt+W 来打开管理员PowerShell
+            var adminHotkey = new Models.Hotkey
+            {
+                Modifiers = System.Windows.Input.ModifierKeys.Alt,
+                Key = System.Windows.Input.Key.W,
+                Original = "Alt+W"
+            };
+            var adminOk = _hotkeyManager.RegisterHotkey(adminHotkey, () =>
+            {
+                var adminManager = AdminPrivilegeManager.Instance;
+                if (adminManager.IsElevated)
+                {
+                    adminManager.RequestAdminPowerShellWithPassword();
+                }
+                else
+                {
+                    _notifyIcon?.ShowBalloonTip(3000, "Admin PowerShell", "Administrator privileges required. Use settings to request elevation first.", WinForms.ToolTipIcon.Warning);
+                }
+            });
+            
+            if (adminOk)
+            {
+                System.Diagnostics.Debug.WriteLine("Admin PowerShell hotkey (Alt+W) registered successfully");
             }
         }
 

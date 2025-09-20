@@ -24,11 +24,11 @@ namespace FastScreeny.Services
                 return;
             }
 
-            var r = region.Value;
-            using var bmp = new Bitmap((int)r.Width, (int)r.Height);
+            var deviceRect = DipRectToDeviceScreenRect(overlay, region.Value);
+            using var bmp = new Bitmap(deviceRect.Width, deviceRect.Height);
             using (var g = Graphics.FromImage(bmp))
             {
-                g.CopyFromScreen((int)r.X, (int)r.Y, 0, 0, new System.Drawing.Size((int)r.Width, (int)r.Height));
+                g.CopyFromScreen(deviceRect.X, deviceRect.Y, 0, 0, new System.Drawing.Size(deviceRect.Width, deviceRect.Height));
             }
 
             // 打开编辑器
@@ -57,10 +57,10 @@ namespace FastScreeny.Services
                 return;
             }
 
-            var r = region.Value;
-            using var bmp = new Bitmap((int)r.Width, (int)r.Height);
+            var deviceRect = DipRectToDeviceScreenRect(overlay, region.Value);
+            using var bmp = new Bitmap(deviceRect.Width, deviceRect.Height);
             using var g = Graphics.FromImage(bmp);
-            g.CopyFromScreen((int)r.X, (int)r.Y, 0, 0, new System.Drawing.Size((int)r.Width, (int)r.Height));
+            g.CopyFromScreen(deviceRect.X, deviceRect.Y, 0, 0, new System.Drawing.Size(deviceRect.Width, deviceRect.Height));
 
             using var finalBmp = ApplyOptionalBorder(bmp, settings.Settings);
             SaveAndCopy(settings, finalBmp);
@@ -69,14 +69,147 @@ namespace FastScreeny.Services
         private static OverlaySelectionWindow CreateOverlayAcrossScreens()
         {
             var allBounds = Screen.AllScreens.Select(s => s.Bounds).Aggregate(Rectangle.Union);
-            var w = new OverlaySelectionWindow
+            var w = new OverlaySelectionWindow();
+            
+            // 调试信息：打印所有屏幕的边界
+            System.Diagnostics.Debug.WriteLine($"All screens combined bounds: {allBounds}");
+            foreach (var screen in Screen.AllScreens)
             {
-                Left = allBounds.Left,
-                Top = allBounds.Top,
-                Width = allBounds.Width,
-                Height = allBounds.Height
-            };
+                System.Diagnostics.Debug.WriteLine($"Screen: {screen.Bounds}, Primary: {screen.Primary}");
+            }
+            
+            // 设置窗口状态以确保正确的覆盖层行为
+            w.WindowState = WindowState.Maximized;  // 使用最大化确保覆盖整个屏幕
+            w.WindowStyle = WindowStyle.None;
+            w.ResizeMode = ResizeMode.NoResize;
+            w.Topmost = true;
+            w.AllowsTransparency = true;
+            w.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(1, 0, 0, 0));
+            
+            // 手动设置窗口位置和尺寸
+            w.Left = allBounds.Left;
+            w.Top = allBounds.Top;
+            w.Width = allBounds.Width;
+            w.Height = allBounds.Height;
+            
+            System.Diagnostics.Debug.WriteLine($"Manual overlay position: Left={w.Left}, Top={w.Top}, Width={w.Width}, Height={w.Height}");
+            
             return w;
+        }
+
+        private static double GetDpiScale()
+        {
+            try
+            {
+                // 获取系统DPI缩放比例
+                using (var graphics = System.Drawing.Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    var dpi = graphics.DpiX;
+                    return dpi / 96.0; // 96 DPI是标准DPI
+                }
+            }
+            catch
+            {
+                return 1.0; // 默认不缩放
+            }
+        }
+
+        private static System.Drawing.Rectangle DipRectToDeviceScreenRect(System.Windows.Window w, System.Windows.Rect dipRect)
+        {
+            // 简化的坐标转换：直接使用屏幕坐标
+            int x = (int)Math.Round(dipRect.X + w.Left);
+            int y = (int)Math.Round(dipRect.Y + w.Top);
+            int width = (int)Math.Round(dipRect.Width);
+            int height = (int)Math.Round(dipRect.Height);
+            
+            System.Diagnostics.Debug.WriteLine($"Converting DIP rect: dipRect={dipRect}, window.Left={w.Left}, window.Top={w.Top}");
+            System.Diagnostics.Debug.WriteLine($"Resulting screen rect: x={x}, y={y}, width={width}, height={height}");
+            
+            // 确保尺寸为正数
+            if (width < 0) 
+            {
+                x += width;
+                width = -width;
+            }
+            if (height < 0)
+            {
+                y += height;
+                height = -height;
+            }
+            
+            return new System.Drawing.Rectangle(x, y, width, height);
+        }
+
+        private static System.Drawing.Rectangle GetCorrectedScreenRect(System.Windows.Rect dipRect, System.Windows.Window w)
+        {
+            // 获取窗口的屏幕位置和DPI信息
+            var windowLeft = (int)Math.Round(w.Left);
+            var windowTop = (int)Math.Round(w.Top);
+            
+            // 使用Windows Forms获取准确的屏幕信息
+            var allScreens = System.Windows.Forms.Screen.AllScreens;
+            System.Drawing.Rectangle targetScreen = System.Drawing.Rectangle.Empty;
+            
+            // 找到包含窗口的屏幕
+            foreach (var screen in allScreens)
+            {
+                if (screen.Bounds.Contains(windowLeft, windowTop))
+                {
+                    targetScreen = screen.Bounds;
+                    break;
+                }
+            }
+            
+            // 如果找不到包含窗口的屏幕，使用主屏幕
+            if (targetScreen.IsEmpty)
+            {
+                targetScreen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+            }
+            
+            // 计算相对于屏幕的坐标
+            int x = windowLeft + (int)Math.Round(dipRect.X);
+            int y = windowTop + (int)Math.Round(dipRect.Y);
+            int width = (int)Math.Round(dipRect.Width);
+            int height = (int)Math.Round(dipRect.Height);
+            
+            // 确保坐标在屏幕范围内
+            x = Math.Max(targetScreen.X, Math.Min(x, targetScreen.Right - width));
+            y = Math.Max(targetScreen.Y, Math.Min(y, targetScreen.Bottom - height));
+            
+            return new System.Drawing.Rectangle(x, y, width, height);
+        }
+
+        private static System.Drawing.Rectangle ValidateAndCorrectScreenCoordinates(int x, int y, int width, int height)
+        {
+            // 验证坐标是否在任何屏幕范围内
+            var allScreens = System.Windows.Forms.Screen.AllScreens;
+            var rect = new System.Drawing.Rectangle(x, y, width, height);
+            
+            // 检查矩形是否与任何屏幕相交
+            foreach (var screen in allScreens)
+            {
+                if (screen.Bounds.IntersectsWith(rect))
+                {
+                    // 确保矩形完全在屏幕范围内
+                    var correctedRect = System.Drawing.Rectangle.Intersect(screen.Bounds, rect);
+                    if (!correctedRect.IsEmpty)
+                    {
+                        return correctedRect;
+                    }
+                }
+            }
+            
+            // 如果没有找到合适的屏幕，尝试找到最近的屏幕
+            var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+            if (x < primaryScreen.Bounds.X || x >= primaryScreen.Bounds.Right || 
+                y < primaryScreen.Bounds.Y || y >= primaryScreen.Bounds.Bottom)
+            {
+                // 将坐标调整到主屏幕范围内
+                x = Math.Max(primaryScreen.Bounds.X, Math.Min(x, primaryScreen.Bounds.Right - width));
+                y = Math.Max(primaryScreen.Bounds.Y, Math.Min(y, primaryScreen.Bounds.Bottom - height));
+            }
+            
+            return new System.Drawing.Rectangle(x, y, width, height);
         }
 
         private static void SaveAndCopy(SettingsService settings, Bitmap bmp)
@@ -137,7 +270,7 @@ namespace FastScreeny.Services
                     blend.Colors = new[] { startColor, BlendColors(startColor, endColor, 0.5f), endColor };
                     blend.Positions = new[] { 0.0f, 0.5f, 1.0f };
                     brush.InterpolationColors = blend;
-                    
+
                     g.FillRectangle(brush, 0, 0, newW, newH);
                 }
 

@@ -17,7 +17,7 @@ namespace FastScreeny.Views
             InitializeComponent();
             _updateService = updateService;
             _updateInfo = updateInfo;
-            
+
             InitializeWindow();
             SubscribeToEvents();
         }
@@ -28,8 +28,8 @@ namespace FastScreeny.Views
             LatestVersionText.Text = _updateInfo.LatestVersion;
             PublishDateText.Text = _updateInfo.PublishedAt.ToString("yyyy-MM-dd");
             FileSizeText.Text = FormatFileSize(_updateInfo.FileSize);
-            ReleaseNotesText.Text = string.IsNullOrEmpty(_updateInfo.ReleaseNotes) 
-                ? "No release notes available" 
+            ReleaseNotesText.Text = string.IsNullOrEmpty(_updateInfo.ReleaseNotes)
+                ? "No release notes available"
                 : _updateInfo.ReleaseNotes;
         }
 
@@ -54,7 +54,7 @@ namespace FastScreeny.Views
             DownloadButton.IsEnabled = false;
             LaterButton.IsEnabled = false;
             SkipButton.IsEnabled = false;
-            
+
             ProgressPanel.Visibility = Visibility.Visible;
             StatusText.Text = "Downloading update file...";
 
@@ -70,18 +70,18 @@ namespace FastScreeny.Views
                 });
 
                 var downloadPath = await _updateService.DownloadUpdateAsync(_updateInfo, progress);
-                
+
                 if (!string.IsNullOrEmpty(downloadPath))
                 {
                     var isZipFile = downloadPath.EndsWith(".zip", StringComparison.OrdinalIgnoreCase);
-                    var message = isZipFile 
+                    var message = isZipFile
                         ? "Download complete! Update the application now?\n\nNote: The application will close during the update process."
                         : "Download complete! Install the update now?\n\nNote: The application will close during the installation.";
-                    
+
                     var result = System.Windows.MessageBox.Show(
-                        message, 
-                        "Download Complete", 
-                        MessageBoxButton.YesNo, 
+                        message,
+                        "Download Complete",
+                        MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.Yes)
@@ -100,14 +100,14 @@ namespace FastScreeny.Views
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("Download failed. Please check your network connection or try again later.", "Download Failed", 
+                    System.Windows.MessageBox.Show("Download failed. Please check your network connection or try again later.", "Download Failed",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                     ResetDownloadState();
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Error during download: {ex.Message}", "Error", 
+                System.Windows.MessageBox.Show($"Error during download: {ex.Message}", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 ResetDownloadState();
             }
@@ -132,9 +132,9 @@ namespace FastScreeny.Views
         private void SkipButton_Click(object sender, RoutedEventArgs e)
         {
             var result = System.Windows.MessageBox.Show(
-                "Are you sure you want to skip this version? The application will no longer remind you to update to this version.", 
-                "Skip Version", 
-                MessageBoxButton.YesNo, 
+                "Are you sure you want to skip this version? The application will no longer remind you to update to this version.",
+                "Skip Version",
+                MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)

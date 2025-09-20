@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
         Background="#01000000" ShowInTaskbar="False" Topmost="True"
-        WindowStartupLocation="Manual" Width="800" Height="600" Opacity="1">
+        WindowStartupLocation="Manual" Opacity="1">
     
     <Window.Resources>
         <!-- 现代化选择框样式 -->

@@ -1,17 +1,19 @@
-d:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.exe
-d:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.dll
+D:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.exe
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.deps.json
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.runtimeconfig.json
+D:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.dll
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\bin\Debug\net8.0-windows\FastScreeny.pdb
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\MainWindow.baml
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\SettingsWindow.baml
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\OverlaySelectionWindow.baml
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\EditorWindow.baml
+D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\UpdateWindow.baml
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\App.baml
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\MainWindow.g.cs
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\SettingsWindow.g.cs
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\OverlaySelectionWindow.g.cs
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\EditorWindow.g.cs
+D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\UpdateWindow.g.cs
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\App.g.cs
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\FastScreeny_MarkupCompile.cache
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\FastScreeny.g.resources
@@ -25,5 +27,3 @@ D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\refint\F
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\FastScreeny.pdb
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\FastScreeny.genruntimeconfig.cache
 D:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\ref\FastScreeny.dll
-d:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\UpdateWindow.baml
-d:\codes\apps\win\mul-fast-screeny\FastScreeny\obj\Debug\net8.0-windows\src\Views\UpdateWindow.g.cs

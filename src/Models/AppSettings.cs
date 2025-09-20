@@ -21,6 +21,10 @@ namespace FastScreeny.Models
         public bool AutoCheckUpdates { get; set; } = true;
         public DateTime LastUpdateCheck { get; set; } = DateTime.MinValue;
         public int UpdateCheckIntervalHours { get; set; } = 24;
+        // Administrator mode settings
+        public bool AdminModeEnabled { get; set; } = false;
+        public DateTime LastResolutionDetection { get; set; } = DateTime.MinValue;
+        public bool EnableAdvancedFeatures { get; set; } = false;
     }
 }
 

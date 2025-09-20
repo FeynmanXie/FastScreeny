@@ -51,7 +51,7 @@ namespace FastScreeny.Services
             {
                 var apiUrl = $"https://api.github.com/repos/{_gitHubOwner}/{_gitHubRepo}/releases/latest";
                 var response = await _httpClient.GetStringAsync(apiUrl);
-                
+
                 var options = new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -89,7 +89,7 @@ namespace FastScreeny.Services
                         break;
                     }
                     // 如果没有ZIP文件，则选择包含Setup的EXE文件
-                    else if (asset.Name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) && 
+                    else if (asset.Name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) &&
                         asset.Name.Contains("Setup", StringComparison.OrdinalIgnoreCase))
                     {
                         updateInfo.DownloadUrl = asset.Browser_Download_Url;
@@ -203,7 +203,7 @@ namespace FastScreeny.Services
             try
             {
                 var extractPath = Path.Combine(Path.GetTempPath(), "FastScreeny_Update");
-                
+
                 // 如果解压目录已存在，先删除
                 if (Directory.Exists(extractPath))
                 {
@@ -242,7 +242,7 @@ namespace FastScreeny.Services
                     // 手动更新：打开解压目录和应用程序目录
                     Process.Start("explorer.exe", extractPath);
                     Process.Start("explorer.exe", appDirectory);
-                    
+
                     System.Windows.MessageBox.Show(
                         "Please manually copy the extracted files to the application directory, then restart the application.",
                         "Manual Update",

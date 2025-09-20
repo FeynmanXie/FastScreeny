@@ -241,7 +241,7 @@
                     </Border>
                     
                     <!-- 边框设置卡片 -->
-                    <Border Background="{StaticResource CardBackground}" CornerRadius="12" Padding="20">
+                    <Border Background="{StaticResource CardBackground}" CornerRadius="12" Padding="20" Margin="0,0,0,16">
                         <Border.Effect>
                             <DropShadowEffect Color="#000000" BlurRadius="8" ShadowDepth="2" Opacity="0.1"/>
                         </Border.Effect>
@@ -284,7 +284,115 @@
                                 <TextBlock Grid.Column="2" Text="End Color" Foreground="#cbd5e1" VerticalAlignment="Center" Margin="16,0,8,0"/>
                                 <TextBox Grid.Column="3" x:Name="BorderEndColorBox" Style="{StaticResource ModernTextBox}"/>
                             </Grid>
-                </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 管理员权限卡片 -->
+                    <Border Background="#dc2626" CornerRadius="12" Padding="20" Margin="0,0,0,16">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#dc2626" BlurRadius="8" ShadowDepth="2" Opacity="0.3"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="🔐 Administrator Privileges" Foreground="#fff1f1" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                            <TextBlock Text="Enable advanced features with administrator privileges" Foreground="#fecaca" FontSize="12" Margin="0,0,0,16"/>
+                            
+                            <Grid Margin="0,0,0,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Current Status:" Foreground="#fecaca" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                <TextBlock x:Name="AdminStatusText" Text="User Mode" Foreground="#fee2e2" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </Grid>
+                            
+                            <Button x:Name="RequestAdminBtn" Content="[Admin] Request Administrator Privileges" 
+                                    Background="#b91c1c" Foreground="White" BorderThickness="0" 
+                                    Padding="16,12" FontSize="13" FontWeight="Medium"
+                                    Margin="0,0,0,12" Click="RequestAdmin_Click">
+                                <Button.Effect>
+                                    <DropShadowEffect Color="#000000" BlurRadius="4" ShadowDepth="1" Opacity="0.3"/>
+                                </Button.Effect>
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}" 
+                                                            CornerRadius="8"
+                                                            Padding="{TemplateBinding Padding}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#991b1b"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            
+                            <StackPanel x:Name="AdminFeaturesPanel" Visibility="Collapsed">
+                                <Button x:Name="DetectResolutionBtn" Content="[Monitor] Detect &amp; Adjust Resolution" 
+                                        Background="#059669" Foreground="White" BorderThickness="0" 
+                                        Padding="16,10" FontSize="13"
+                                        Margin="0,0,0,8" Click="DetectResolution_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}" 
+                                                                CornerRadius="8"
+                                                                Padding="{TemplateBinding Padding}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#047857"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                
+                                
+                                <TextBlock x:Name="LastDetectionText" Text="Resolution detection: Never performed" 
+                                          Foreground="#fecaca" FontSize="11" Margin="0,8,0,0"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="⚠️ UAC elevation will occur once when requesting privileges" 
+                                      Foreground="#fecaca" FontSize="11" FontStyle="Italic" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 开发者面板 (初始隐藏) -->
+                    <Border x:Name="DeveloperPanel" Background="#2d1b69" CornerRadius="12" Padding="20" Margin="0,0,0,16" Visibility="Collapsed">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#7c3aed" BlurRadius="8" ShadowDepth="2" Opacity="0.3"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="🔧 Developer Tools" Foreground="#f8fafc" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                            <TextBlock Text="Advanced diagnostic and debugging tools" Foreground="#a78bfa" FontSize="12" Margin="0,0,0,12"/>
+                            
+                            <Grid Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="System Info:" Foreground="#cbd5e1" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <TextBlock Grid.Column="1" x:Name="SystemInfoText" Text="Loading..." Foreground="#e2e8f0" TextWrapping="Wrap"/>
+                            </Grid>
+                            
+                            <Button x:Name="CreateResolutionScriptBtn" Content="Create Resolution Detection Script" 
+                                    Style="{StaticResource ModernButton}" Margin="0,12,0,0" Click="CreateResolutionScript_Click"/>
+                            
+                        </StackPanel>
                     </Border>
             </StackPanel>
         </ScrollViewer>

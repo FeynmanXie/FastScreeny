@@ -60,17 +60,17 @@ namespace FastScreeny
             BorderStartColorBox.Text = _settingsService.Settings.BorderGradientStart;
             BorderEndColorBox.Text = _settingsService.Settings.BorderGradientEnd;
             BorderPresetBox.SelectionChanged += BorderPresetBox_SelectionChanged;
-            
+
             // 添加边框预览事件
             EnableBorderCheck.Checked += BorderSettings_Changed;
             EnableBorderCheck.Unchecked += BorderSettings_Changed;
             BorderThicknessBox.TextChanged += BorderSettings_Changed;
             BorderStartColorBox.TextChanged += BorderSettings_Changed;
             BorderEndColorBox.TextChanged += BorderSettings_Changed;
-            
+
             // 初始预览
             UpdateBorderPreview();
-            
+
             // 确保Canvas尺寸正确
             this.Loaded += EditorWindow_Loaded;
         }
@@ -86,7 +86,7 @@ namespace FastScreeny
             // 设置OverlayCanvas的尺寸与BaseImage匹配
             var imageWidth = BaseImage.ActualWidth > 0 ? BaseImage.ActualWidth : _workingBitmap.Width;
             var imageHeight = BaseImage.ActualHeight > 0 ? BaseImage.ActualHeight : _workingBitmap.Height;
-            
+
             OverlayCanvas.Width = imageWidth;
             OverlayCanvas.Height = imageHeight;
         }
@@ -132,15 +132,15 @@ namespace FastScreeny
             }
         }
 
-        private void ToolCircleBtn_Click(object sender, RoutedEventArgs e) 
+        private void ToolCircleBtn_Click(object sender, RoutedEventArgs e)
         {
             _currentTool = Tool.Circle;
         }
-        private void ToolRectBtn_Click(object sender, RoutedEventArgs e) 
+        private void ToolRectBtn_Click(object sender, RoutedEventArgs e)
         {
             _currentTool = Tool.Rect;
         }
-        private void ToolArrowBtn_Click(object sender, RoutedEventArgs e) 
+        private void ToolArrowBtn_Click(object sender, RoutedEventArgs e)
         {
             _currentTool = Tool.Arrow;
         }
@@ -152,7 +152,7 @@ namespace FastScreeny
             {
                 return; // 不允许在边框预览上绘图
             }
-            
+
             var canvas = sender as Canvas;
             _dragStart = e.GetPosition(canvas);
             _dragging = true;
@@ -178,7 +178,7 @@ namespace FastScreeny
         {
             // 确保Canvas尺寸正确
             UpdateCanvasSizes();
-            
+
             var brush = CurrentBrush();
             switch (_currentTool)
             {
@@ -243,7 +243,7 @@ namespace FastScreeny
         private void CommitPreviewShape()
         {
             if (_previewShape == null) return;
-            
+
             var rt = new System.Windows.Rect(System.Windows.Controls.Canvas.GetLeft(_previewShape), System.Windows.Controls.Canvas.GetTop(_previewShape), _previewShape.Width, _previewShape.Height);
 
             using (var g = Graphics.FromImage(_workingBitmap))
@@ -279,7 +279,7 @@ namespace FastScreeny
             BaseImage.Source = BitmapToImageSource(_workingBitmap);
             OverlayCanvas.Children.Remove(_previewShape);
             _previewShape = null;
-            
+
             // 绘制完成后更新边框预览
             UpdateBorderPreview();
         }

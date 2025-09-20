@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FastScreeny")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.4.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.4+3f707f99d9ecd8d39ac16449ad221d69f15f6d26")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.4+5ac82a4535b29393f0bb35765530c35f38195447")]
 [assembly: System.Reflection.AssemblyProductAttribute("FastScreeny")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FastScreeny")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.4.0")]
