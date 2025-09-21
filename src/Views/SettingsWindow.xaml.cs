@@ -203,7 +203,7 @@ namespace FastScreeny
             {
                 DeveloperPanel.Visibility = Visibility.Visible;
                 // 滚动到开发者面板
-                var scrollViewer = FindChild<ScrollViewer>(this, null);
+                var scrollViewer = FindChild<ScrollViewer>(this, null!);
                 if (scrollViewer != null)
                 {
                     scrollViewer.ScrollToEnd();
@@ -242,7 +242,7 @@ namespace FastScreeny
                 using (var process = Process.GetCurrentProcess())
                 {
                     // 简单的DPI感知检查
-                    var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+                    var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen!;
                     var bounds = primaryScreen.Bounds;
                     var workingArea = primaryScreen.WorkingArea;
                     
@@ -353,7 +353,7 @@ namespace FastScreeny
         }
 
 
-        private T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        private T? FindChild<T>(DependencyObject parent, string? childName) where T : DependencyObject
         {
             if (parent == null) return null;
             

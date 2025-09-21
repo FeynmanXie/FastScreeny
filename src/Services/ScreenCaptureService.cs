@@ -163,7 +163,7 @@ namespace FastScreeny.Services
             // 如果找不到包含窗口的屏幕，使用主屏幕
             if (targetScreen.IsEmpty)
             {
-                targetScreen = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+                targetScreen = System.Windows.Forms.Screen.PrimaryScreen!.Bounds;
             }
             
             // 计算相对于屏幕的坐标
@@ -200,7 +200,7 @@ namespace FastScreeny.Services
             }
             
             // 如果没有找到合适的屏幕，尝试找到最近的屏幕
-            var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+            var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen!;
             if (x < primaryScreen.Bounds.X || x >= primaryScreen.Bounds.Right || 
                 y < primaryScreen.Bounds.Y || y >= primaryScreen.Bounds.Bottom)
             {
