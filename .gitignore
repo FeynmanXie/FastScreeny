@@ -1,4 +1,12 @@
 bin/
+build/
+bin/Release/net8.0-windows/
+bin/Debug/net8.0-windows/
+bin/Release/
+bin/Debug/
+obj/
+dist/
+dist/installer/
 obj/
 setup/
 AGENTS.md
