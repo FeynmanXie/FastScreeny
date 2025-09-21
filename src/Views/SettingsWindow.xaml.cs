@@ -402,7 +402,7 @@ namespace FastScreeny
             
             if (isElevated)
             {
-                AdminStatusText.Text = "Administrator Mode";
+                // 已获取管理员权限状态：绿色主题，显示高级功能面板
                 AdminStatusText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 197, 94)); // Green
                 RequestAdminBtn.Content = "🔓 Administrator Mode Active";
                 RequestAdminBtn.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(34, 197, 94));
@@ -411,7 +411,7 @@ namespace FastScreeny
             }
             else
             {
-                AdminStatusText.Text = "User Mode";
+                // 未获取管理员权限状态：红色主题，隐藏高级功能面板
                 AdminStatusText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 226, 226)); // Light red
                 RequestAdminBtn.Content = "🔒 Request Administrator Privileges";
                 RequestAdminBtn.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(185, 28, 28));
@@ -455,7 +455,7 @@ namespace FastScreeny
                 "You will see a UAC prompt - click 'Yes' to continue.\n\n" +
                 "After elevation, you can access advanced features like:\n" +
                 "• Resolution detection and adjustment\n" +
-                "• Admin PowerShell with password protection\n\n" +
+                "• System diagnostic tools\n\n" +
                 "Continue?",
                 "Request Administrator Privileges",
                 MessageBoxButton.YesNo,
